@@ -36,5 +36,7 @@ strider:
    - SMTP_USER=${SMTP_USER}
    - SMTP_PASS=${SMTP_PASS}
    - SMTP_FROM=${SMTP_FROM}
+   - CONCURRENT_JOBS=${STRIDER_JOBS}
+   - HTTP_PROXY=${STRIDER_PROXY}
   labels:
     io.rancher.container.pull_image: always
