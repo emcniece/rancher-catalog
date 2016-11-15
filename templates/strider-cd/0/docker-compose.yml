@@ -24,7 +24,7 @@ strider:
    - smtp:smtp
   volumes:
    #- ${DIR}/strider/data:/data
-   - ${DIR}/strider/opt:/opt/strider
+   #- ${DIR}/strider/opt:/opt/strider
   environment:
    - SERVER_NAME=${STRIDER_DOMAIN}
    - HOST=${STRIDER_HOST}
