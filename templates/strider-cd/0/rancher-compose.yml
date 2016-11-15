@@ -1,0 +1,101 @@
+.catalog:
+  name: strider-cd
+  version: v0.0.1-rancher1
+  description: |
+    Strider Continuous Deployment agent
+  maintainer: "Eric McNiece <emcniece@gmail.com>, Andrew Cutler <candrew@panubo.io>"
+  uuid: strider-cd-0
+  questions:
+    - variable: "DIR"
+      label: "Storage directory"
+      description: "Path of shared storage to use for Strider, Mongo and Postfix. This should be available on all hosts"
+      required: true
+      type: "string"
+    - variable: "STRIDER_PORT"
+      description: "Port that strider runs on, optional (defaults to 3000)"
+      label: "Strider Port"
+      required: true
+      default: 3000
+      type: "int"
+    - variable: "STRIDER_DOMAIN"
+      description: "Required; Address at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
+      label: "Strider Domain"
+      required: true
+      type: "string"
+    - variable: "STRIDER_PORT"
+      description: "Port that strider runs on, optional (defaults to 3000)"
+      label: "Strider Port"
+      required: false
+      default: 3000
+      type: "int"
+    - variable: "ADMIN_EMAIL"
+      description: "Default user (admin) email address"
+      label: "Strider Admin Email"
+      required: false
+      type: "string"
+    - variable: "ADMIN_PASS"
+      label: "Strider Admin Password"
+      description: "Default user (admin) password"
+      required: false
+      default: password
+      type: "password"
+
+    - variable: "MAILNAME"
+      label: "Postfix Hostname"
+      description: "Set this to a legitimate hostname for this service (required)"
+      required: true
+      type: "string"
+    - variable: "MYNETWORKS"
+      label: "Postfix Allowed Subnets"
+      description: "Comma separated list of IP subnets that are allowed to relay"
+      required: false
+      type: "string"
+
+    - variable: "SMTP_HOST"
+      label: "SMTP Host"
+      description: "Hostname for the SMTP user"
+      required: false
+      type: "string"
+    - variable: "SMTP_PORT"
+      label: "SMTP Port"
+      description: "Port for the SMTP user"
+      required: false
+      default: 587
+      type: "int"
+    - variable: "SMTP_USER"
+      label: "SMTP Username"
+      description: "Username for the SMTP user"
+      required: false
+      type: "string"
+    - variable: "SMTP_PASS"
+      label: "SMTP Password"
+      description: "Password for the SMTP user"
+      required: false
+      default: password
+      type: "password"
+    - variable: "SMTP_FROM"
+      label: "SMTP Sender Address"
+      description: "Address that mail is sent from"
+      required: false
+      type: "string"
+
+    - variable: "GITHUB_ID"
+      label: "Github App ID"
+      description: "Strider Github Provider App ID"
+      required: false
+      type: "string"
+    - variable: "GITHUB_KEY"
+      label: "Github App Secret Key"
+      description: "Strider Github Provider App"
+      required: false
+      type: "string"
+    - variable: "GITHUB_DOMAIN"
+      label: "Github Domain Name"
+      description: "Defaults to https://github.com"
+      required: false
+      type: "string"
+    - variable: "GITHUB_ENDPOINT"
+      label: "Github API Endpoint"
+      description: "Defaults to https://api.github.com"
+      required: false
+      type: "string"
