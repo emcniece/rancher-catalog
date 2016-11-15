@@ -1,6 +1,6 @@
 #Strider CD
 
-From https://github.com/emcniece/rancher-catalog
+From [https://github.com/emcniece/rancher-catalog](https://github.com/emcniece/rancher-catalog)
 
 This catalog item consists of MongoDB, [Postfix](https://github.com/panubo/docker-postfix), and [Strider CD](https://github.com/macropin/docker-strider).
 

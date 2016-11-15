@@ -1,5 +1,5 @@
 .catalog:
-  name: strider-cd
+  name: Strider CD
   version: v0.0.1-rancher1
   description: |
     Strider Continuous Deployment agent
@@ -22,12 +22,6 @@
       label: "Strider Domain"
       required: true
       type: "string"
-    - variable: "STRIDER_PORT"
-      description: "Port that strider runs on, optional (defaults to 3000)"
-      label: "Strider Port"
-      required: false
-      default: 3000
-      type: "int"
     - variable: "ADMIN_EMAIL"
       description: "Default user (admin) email address"
       label: "Strider Admin Email"
@@ -44,6 +38,7 @@
       label: "Postfix Hostname"
       description: "Set this to a legitimate hostname for this service (required)"
       required: true
+      default: "test"
       type: "string"
     - variable: "MYNETWORKS"
       label: "Postfix Allowed Subnets"
