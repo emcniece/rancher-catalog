@@ -1,7 +1,7 @@
 name: strider-cd
 description: |
   Strider Continuous Deployment agent
-version: 0.0.1-rancher1
+version: 0.0.2-rancher1
 category: Continuous Integration
 maintainer: "Eric McNiece <emcniece@gmail.com>, Andrew Cutler <candrew@panubo.io>"
 projectURL: https://github.com/macropin/docker-strider
