@@ -1,0 +1,19 @@
+.catalog:
+  name: Apt-Cacher-NG
+  version: v0.0.1-rancher1
+  description: |
+    Software Package Download Proxy
+  maintainer: "Eric McNiece <emcniece@gmail.com>, Sameer Naik <sameer@damagehead.com>"
+  uuid: apt-cacher-ng-0
+  questions:
+    - variable: "DIR"
+      label: "Storage directory"
+      description: "Path of shared storage to use for caching packages"
+      required: false
+      type: "string"
+    - variable: "PORT"
+      description: "Port that the proxy is available on"
+      label: "Port"
+      required: false
+      default: 3142
+      type: "int"
