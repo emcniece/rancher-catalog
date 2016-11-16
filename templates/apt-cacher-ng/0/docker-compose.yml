@@ -1,0 +1,8 @@
+AptCacherNG:
+  image: sameersbn/apt-cacher-ng:latest
+  tty: true
+  stdin_open: true
+  ports:
+    - "${PORT}:3142"
+  volumes:
+    - ${DIR}:/var/cache/apt-cacher-ng
