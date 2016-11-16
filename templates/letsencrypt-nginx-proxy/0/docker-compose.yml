@@ -1,35 +1,37 @@
-nginx:
-  image: "nginx"
-  tty: true
-  stdin_open: true
-  ports:
-    - 80:80
-    - 443:443
-  volumes:
-    - /home/build/limbic-ci/nginx/conf.d:/etc/nginx/conf.d
-    - /home/build/limbic-ci/nginx/vhost.d:/etc/nginx/vhost.d
-    - /home/build/limbic-ci/nginx/html:/usr/share/nginx/html
-    - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:ro
-  labels:
-    io.rancher.sidekicks: nginx-gen,letsencrypt
-nginx-gen:
-  image: "jwilder/docker-gen"
-  tty: true
-  stdin_open: true
-  volumes_from:
-    - nginx
-  volumes:
-    - /home/build/limbic-ci/nginx/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
-    - /var/run/docker.sock:/tmp/docker.sock:ro
-  links:
-    - nginx
-  command: "-notify-sighup nginx -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
-letsencrypt:
-  image: "jrcs/letsencrypt-nginx-proxy-companion"
-  tty: true
-  stdin_open: true
-  volumes_from:
-    - nginx
-  volumes:
-    - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:rw
-    - /var/run/docker.sock:/var/run/docker.sock:ro
+version: '2'
+services:
+  nginx:
+    image: "nginx"
+    tty: true
+    stdin_open: true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/build/limbic-ci/nginx/conf.d:/etc/nginx/conf.d
+      - /home/build/limbic-ci/nginx/vhost.d:/etc/nginx/vhost.d
+      - /home/build/limbic-ci/nginx/html:/usr/share/nginx/html
+      - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:ro
+    labels:
+      io.rancher.sidekicks: nginx-gen,letsencrypt
+  nginx-gen:
+    image: "jwilder/docker-gen"
+    tty: true
+    stdin_open: true
+    volumes_from:
+      - nginx
+    volumes:
+      - /home/build/limbic-ci/nginx/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    links:
+      - nginx
+    command: "-notify-sighup nginx -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
+  letsencrypt:
+    image: "jrcs/letsencrypt-nginx-proxy-companion"
+    tty: true
+    stdin_open: true
+    volumes_from:
+      - nginx
+    volumes:
+      - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
