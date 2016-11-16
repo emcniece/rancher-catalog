@@ -3,13 +3,15 @@ nginx:
   tty: true
   stdin_open: true
   ports:
-    - ${WEB_PORT}:80
-    - ${SSL_PORT}:443
+    - 80:80
+    - 443:443
   volumes:
-    - ${DIR}/conf.d:/etc/nginx/conf.d
-    - ${DIR}/vhost.d:/etc/nginx/vhost.d
-    - ${DIR}/html:/usr/share/nginx/html
-    - ${DIR}/certs:/etc/nginx/certs:ro
+    - /home/build/limbic-ci/nginx/conf.d:/etc/nginx/conf.d
+    - /home/build/limbic-ci/nginx/vhost.d:/etc/nginx/vhost.d
+    - /home/build/limbic-ci/nginx/html:/usr/share/nginx/html
+    - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:ro
+  labels:
+    io.rancher.sidekicks: nginx-gen,letsencrypt
 nginx-gen:
   image: "jwilder/docker-gen"
   tty: true
@@ -17,8 +19,8 @@ nginx-gen:
   volumes_from:
     - nginx
   volumes:
-    - ${DIR}/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
-    - ${SOCKET}:/tmp/docker.sock:ro
+    - /home/build/limbic-ci/nginx/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+    - /var/run/docker.sock:/tmp/docker.sock:ro
   links:
     - nginx
   command: "-notify-sighup nginx -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
@@ -29,5 +31,5 @@ letsencrypt:
   volumes_from:
     - nginx
   volumes:
-    - ${DIR}/certs:/etc/nginx/certs:rw
-    - ${SOCKET}:/var/run/docker.sock:ro
+    - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:rw
+    - /var/run/docker.sock:/var/run/docker.sock:ro
