@@ -1,6 +1,6 @@
 .catalog:
   name: Let's Encrypt Nginx Proxy
-  version: v0.0.3-rancher1
+  version: v0.0.4-rancher1
   description: |
     Nginx reverse proxy from JWilder with ACME support
   maintainer: "Eric McNiece <emcniece@gmail.com>, Martin Treml <github@r2pi.net>"
