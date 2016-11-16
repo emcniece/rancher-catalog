@@ -14,7 +14,8 @@ nginx-gen:
   image: "jwilder/docker-gen"
   tty: true
   stdin_open: true
-  volumes_from: nginx
+  volumes_from:
+    - nginx
   volumes:
     - ${DIR}/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
     - ${SOCKET}:/tmp/docker.sock:ro
@@ -25,7 +26,8 @@ letsencrypt:
   image: "jrcs/letsencrypt-nginx-proxy-companion"
   tty: true
   stdin_open: true
-  volumes_from: nginx
+  volumes_from:
+    - nginx
   volumes:
     - ${DIR}/certs:/etc/nginx/certs:rw
     - ${SOCKET}:/var/run/docker.sock:ro
