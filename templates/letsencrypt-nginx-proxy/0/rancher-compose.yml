@@ -29,3 +29,9 @@
       required: true
       type: "string"
       default: "/var/run/docker.sock"
+nginx:
+  scale: 1
+nginx-gen:
+  scale: 1
+letsencrypt:
+  scale: 1
