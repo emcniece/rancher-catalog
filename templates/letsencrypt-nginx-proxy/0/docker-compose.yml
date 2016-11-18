@@ -34,6 +34,10 @@ services:
     stdin_open: true
     links:
       - nginx
+    volumes_from:
+      - nginx
+    labels:
+      io.rancher.sidekicks: nginx
     volumes:
       - ${DIR}/conf.d:/etc/nginx/conf.d
       - ${DIR}/vhost.d:/etc/nginx/vhost.d
