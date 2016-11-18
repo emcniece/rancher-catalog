@@ -32,6 +32,8 @@ services:
     image: "jrcs/letsencrypt-nginx-proxy-companion"
     tty: true
     stdin_open: true
+    links:
+      - nginx
     volumes:
       - ${DIR}/conf.d:/etc/nginx/conf.d
       - ${DIR}/vhost.d:/etc/nginx/vhost.d
