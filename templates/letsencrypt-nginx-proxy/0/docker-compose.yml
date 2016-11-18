@@ -8,36 +8,33 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /home/build/limbic-ci/nginx/conf.d:/etc/nginx/conf.d
-      - /home/build/limbic-ci/nginx/vhost.d:/etc/nginx/vhost.d
-      - /home/build/limbic-ci/nginx/html:/usr/share/nginx/html
-      - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:ro
+      - ${DIR}/conf.d:/etc/nginx/conf.d
+      - ${DIR}/vhost.d:/etc/nginx/vhost.d
+      - ${DIR}/html:/usr/share/nginx/html
+      - ${DIR}/certs:/etc/nginx/certs:ro
     labels:
       io.rancher.scheduler.global: 'true'
   nginx-gen:
     image: "jwilder/docker-gen"
     tty: true
     stdin_open: true
-    volumes_from:
-      - nginx
     volumes:
-      - /home/build/limbic-ci/nginx/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ${DIR}/conf.d:/etc/nginx/conf.d
+      - ${DIR}/vhost.d:/etc/nginx/vhost.d
+      - ${DIR}/html:/usr/share/nginx/html
+      - ${DIR}/certs:/etc/nginx/certs:ro
+      - ${DIR}/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+      - ${SOCKET}:/tmp/docker.sock:ro
     links:
       - nginx
     command: "-notify-sighup nginx -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
-    labels:
-      io.rancher.sidekicks: nginx
-      io.rancher.scheduler.global: 'true'
   letsencrypt:
     image: "jrcs/letsencrypt-nginx-proxy-companion"
     tty: true
     stdin_open: true
-    volumes_from:
-      - nginx
     volumes:
-      - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      io.rancher.sidekicks: nginx
-      io.rancher.scheduler.global: 'true'
+      - ${DIR}/conf.d:/etc/nginx/conf.d
+      - ${DIR}/vhost.d:/etc/nginx/vhost.d
+      - ${DIR}/html:/usr/share/nginx/html
+      - ${DIR}/certs:/etc/nginx/certs:rw
+      - ${SOCKET}:/var/run/docker.sock:ro
