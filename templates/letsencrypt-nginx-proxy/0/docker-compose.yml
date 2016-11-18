@@ -27,6 +27,7 @@ services:
       - nginx
     command: "-notify-sighup nginx -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
     labels:
+      io.rancher.sidekicks: nginx
       io.rancher.scheduler.global: 'true'
   letsencrypt:
     image: "jrcs/letsencrypt-nginx-proxy-companion"
@@ -38,4 +39,5 @@ services:
       - /home/build/limbic-ci/nginx/certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
+      io.rancher.sidekicks: nginx
       io.rancher.scheduler.global: 'true'
