@@ -95,6 +95,12 @@
       description: "Email address used for ACME cert generation. Only used if paired with the <strong>Let's Encrypt Nginx Proxy</strong> stack"
       required: false
       type: "string"
+    - variable: "CERT_DIRECTORY"
+      label: "CERT_DIRECTORY"
+      description: "Location for the generated SSL certificates."
+      required: false
+      type: "string"
+      default: "/etc/letsencrypt/live/mydomain.com/"
     - variable: "CERT_NAME"
       label: "CERT_NAME"
       description: "Name of the .crt certificate"
