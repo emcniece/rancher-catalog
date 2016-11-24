@@ -8,7 +8,7 @@ db:
   tty: true
   stdin_open: true
   volumes:
-  - ${DIR}/db:/var/lib/mysql
+    - ${DIR}/db:/var/lib/mysql
 registry:
   image: registry:2.1
   environment:
@@ -29,11 +29,13 @@ registry:
         backoff: 1
   tty: true
   stdin_open: true
+  ports:
+    - ${RPORT}:5000
   links:
-  - portus:portus
+    - portus:portus
   volumes:
-  - ${CERT_DIRECTORY}:/certs:ro
-  - ${DIR}/data:/var/lib/registry
+    - ${CERT_DIRECTORY}:/certs:ro
+    - ${DIR}/data:/var/lib/registry
 portus:
   image: sshipway/portus:2.0.3
   environment:
@@ -71,8 +73,10 @@ portus:
   tty: true
   stdin_open: true
   volumes:
-  - ${CERT_DIRECTORY}:/certs
+    - ${CERT_DIRECTORY}:/certs
   links:
-  - db:db
+    - db:db
+  ports:
+    - ${PPORT}:3000
   labels:
     io.rancher.container.pull_image: always
