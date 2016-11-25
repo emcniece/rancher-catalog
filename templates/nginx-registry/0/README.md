@@ -8,4 +8,6 @@ It is set up to be compatible with an external Nginx proxy, or as a standalone s
 
 A single certificate set is used for Portus and the Docker Registry. Typically these files are `registry.crt` and `registry.key`, but if Let's Encrypt is used these files can be `fullchain.pem` and `privkey.pem` respectively.
 
+<strong>Note:</strong> Docker doesn't play nice with symlinked certificates. Voluming `/etc/letsencrypt/live/
+
 This stack will not start until the certificates are available and accessible. If using the Let's Encrypt service, both stacks may need to be restarted separately in order to generate the certs.

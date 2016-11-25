@@ -8,3 +8,4 @@ This catalog item consists of the recommended setup for JWilder's NGINX Proxy - 
 - nginx-gen
 - nginx-letsencrypt
 
+Before installing, ensure that the storage directory exists and `${DIR}/templates/nginx.tmpl` contains the contents of a template [like this one](https://gist.github.com/emcniece/9193055dc777af203db8bb18ac8a0a25).

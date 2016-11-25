@@ -17,3 +17,13 @@
       required: false
       default: 3142
       type: "int"
+    - variable: "VIRTUAL_HOST"
+      label: "VIRTUAL_HOST"
+      description: "Environment variable for hostname"
+      required: false
+      type: "string"
+    - variable: "LETSENCRYPT_EMAIL"
+      label: "LETSENCRYPT_EMAIL"
+      description: "Email address used for ACME cert generation. Only used if paired with the <strong>Let's Encrypt Nginx Proxy</strong> stack"
+      required: false
+      type: "string"
