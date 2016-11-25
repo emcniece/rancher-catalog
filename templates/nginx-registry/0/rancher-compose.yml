@@ -1,6 +1,6 @@
 .catalog:
   name: "Registry"
-  version: "v0.0.2"
+  version: "v0.0.3"
   description: "Docker Registry"
   uuid: registry-2
   questions:
@@ -103,16 +103,21 @@
       default: "/etc/letsencrypt/live/mydomain.com/"
     - variable: "CERT_NAME"
       label: "CERT_NAME"
-      description: "Name of the .crt certificate"
+      description: "Name of the .crt certificate  (ie. cert.pem)"
       required: false
       type: "string"
       default: "registry.crt"
     - variable: "KEY_NAME"
       label: "KEY_NAME"
-      description: "Name of the .key certificate"
+      description: "Name of the .key certificate (ie. key.pem)"
       required: false
       type: "string"
       default: "registry.key"
+    - variable: "BUNDLE_NAME"
+      label: "BUNDLE_NAME"
+      description: "Name of the CA bundle (ie. fullchain.pem)"
+      required: false
+      type: "string"
 db:
   scale: 1
 registry:
