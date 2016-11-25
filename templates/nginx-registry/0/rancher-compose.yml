@@ -1,6 +1,6 @@
 .catalog:
   name: "Registry"
-  version: "v0.0.1"
+  version: "v0.0.2"
   description: "Docker Registry"
   uuid: registry-2
   questions:

@@ -21,10 +21,6 @@ registry:
     REGISTRY_HTTP_TLS_CERTIFICATE: /certs/${CERT_NAME}
     REGISTRY_HTTP_TLS_KEY: /certs/${KEY_NAME}
     REGISTRY_HTTP_SECRET: httpsecret
-    VIRTUAL_HOST: ${DOMAIN}
-    VIRTUAL_PORT: ${RPORT}
-    LETSENCRYPT_HOST: ${DOMAIN}
-    LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     REGISTRY_NOTIFICATIONS_ENDPOINTS: >
       - name: portus
         url: http://portus:3000/v2/webhooks/events
