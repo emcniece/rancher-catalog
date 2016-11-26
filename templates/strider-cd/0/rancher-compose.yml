@@ -105,3 +105,11 @@
       description: "Defaults to https://api.github.com"
       required: false
       type: "string"
+mongo:
+  scale: 1
+smtp:
+  scale: 1
+strider:
+  scale: 1
+db:
+  scale: 1
