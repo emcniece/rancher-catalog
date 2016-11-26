@@ -1,4 +1,4 @@
-name: apt-cacher-ng
+name: Apt-Cacher-NG
 description: |
   Software Package Download Proxy
 version: 0.0.1-rancher1

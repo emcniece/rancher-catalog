@@ -1,4 +1,4 @@
-name: strider-cd
+name: Strider CD
 description: |
   Strider Continuous Deployment agent
 version: 0.0.5-rancher1

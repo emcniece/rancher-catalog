@@ -1,4 +1,4 @@
-name: tutum-logrotate
+name: Tutum LogRotate
 description: |
   Truncates container logs when they grow in size to avoid filling up the disk
 version: 0.0.1-rancher1
