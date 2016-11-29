@@ -15,7 +15,7 @@
     description: "Deploy on every host - sets the `io.rancher.scheduler.global` label to `true`."
     label: "Global Deploy"
     required: true
-    type: boolean
+    type: "boolean"
   - variable: "VIRTUAL_HOST"
     description: "FQDN at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
     label: "VIRTUAL_HOST"
