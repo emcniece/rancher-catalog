@@ -7,12 +7,22 @@
   uuid: whoami-0
   questions:
   - variable: "PORT"
-    description: "Port for HTTP traffic"
+    description: "Port for HTTP traffic. Leave blank to let Rancher choose a random port."
     label: "HTTP Port"
     required: false
     type: "int"
   - variable: "GLOBAL"
-    description: "Deploy on every host"
+    description: "Deploy on every host - sets the `io.rancher.scheduler.global` label to `true`."
     label: "Global Deploy"
     required: true
     type: boolean
+  - variable: "VIRTUAL_HOST"
+      description: "FQDN at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
+      label: "VIRTUAL_HOST"
+      required: false
+      type: "string"
+  - variable: "LETSENCRYPT_EMAIL"
+      label: "LETSENCRYPT_EMAIL"
+      description: "Email address used for ACME cert generation. Only used if paired with the <strong>Let's Encrypt Nginx Proxy</strong> stack"
+      required: false
+      type: "string"
