@@ -1,10 +1,10 @@
 .catalog:
   name: Let's Encrypt Nginx Proxy
-  version: v0.0.10-rancher1
+  version: v0.0.12-rancher1
   description: |
     Nginx reverse proxy from JWilder with ACME support
   maintainer: "Eric McNiece <emcniece@gmail.com>, Martin Treml <github@r2pi.net>"
-  uuid: letsencrypt-nginx-proxy-0
+  uuid: lnp-0
   questions:
     - variable: "WEB_PORT"
       description: "Port for HTTP traffic"
