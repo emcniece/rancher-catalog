@@ -1,0 +1,18 @@
+.catalog:
+  name: WhoAmI
+  version: v0.0.1-rancher1
+  description: |
+    Container identification helper
+  maintainer: "Eric McNiece <emcniece@gmail.com>"
+  uuid: whoami-0
+  questions:
+  - variable: "PORT"
+    description: "Port for HTTP traffic"
+    label: "HTTP Port"
+    required: false
+    type: "int"
+  - variable: "GLOBAL"
+    description: "Deploy on every host"
+    label: "Global Deploy"
+    required: true
+    type: boolean

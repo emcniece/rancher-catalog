@@ -1,0 +1,12 @@
+version: '2'
+services:
+  whoami:
+    image: "emilevauge/whoami"
+    tty: true
+    stdin_open: true
+    ports:
+      - ${PORT}:80
+    labels:
+      io.rancher.scheduler.global: ${GLOBAL}
+whoami:
+  scale: 1
