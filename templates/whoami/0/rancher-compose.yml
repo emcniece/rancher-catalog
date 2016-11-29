@@ -17,12 +17,12 @@
     required: true
     type: boolean
   - variable: "VIRTUAL_HOST"
-      description: "FQDN at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
-      label: "VIRTUAL_HOST"
-      required: false
-      type: "string"
+    description: "FQDN at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
+    label: "VIRTUAL_HOST"
+    required: false
+    type: "string"
   - variable: "LETSENCRYPT_EMAIL"
-      label: "LETSENCRYPT_EMAIL"
-      description: "Email address used for ACME cert generation. Only used if paired with the <strong>Let's Encrypt Nginx Proxy</strong> stack"
-      required: false
-      type: "string"
+    label: "LETSENCRYPT_EMAIL"
+    description: "Email address used for ACME cert generation. Only used if paired with the <strong>Let's Encrypt Nginx Proxy</strong> stack"
+    required: false
+    type: "string"
