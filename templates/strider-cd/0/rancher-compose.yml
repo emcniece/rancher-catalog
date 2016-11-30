@@ -1,6 +1,6 @@
 .catalog:
   name: Strider CD
-  version: v0.0.11-rancher1
+  version: v0.0.12-rancher1
   description: |
     Strider Continuous Deployment agent
   maintainer: "Eric McNiece <emcniece@gmail.com>, Andrew Cutler <candrew@panubo.io>"
@@ -21,6 +21,7 @@
       label: "Domain Prefix"
       required: true
       type: "enum"
+      default: "http"
       options:
         - "http"
         - "https"
