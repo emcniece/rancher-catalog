@@ -23,7 +23,8 @@ strider:
    - mongo:mongo
    - smtp:smtp
   volumes:
-   - ${DIR}/strider:/data
+   - ${DIR}/strider:/opt/strider
+   - ${DIR}/data:/data
   environment:
    - SERVER_NAME=${STRIDER_DOMAIN}
    - HOST=${STRIDER_HOST}
