@@ -14,7 +14,7 @@ smtp:
    - MAILNAME=${MAILNAME}
    - MYNETWORKS=${MYNETWORKS}
 strider:
-  image: "macropin/strider"
+  image: "emcniece/strider"
   tty: true
   stdin_open: true
   ports:
@@ -23,8 +23,7 @@ strider:
    - mongo:mongo
    - smtp:smtp
   volumes:
-   - ${DIR}/strider/test:/opt/strider/test
-   - ${DIR}/test2:/test2
+   - ${DIR}/strider:/opt/strider/
   environment:
    - SERVER_NAME=${STRIDER_PREFIX}://${STRIDER_FQDN}
    - HOST=${STRIDER_HOST}
