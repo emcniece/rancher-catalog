@@ -3,7 +3,6 @@ version: '2'
 services:
   nginx:
     image: "nginx"
-    container_name: "nginx"
     tty: true
     stdin_open: true
     ports:
