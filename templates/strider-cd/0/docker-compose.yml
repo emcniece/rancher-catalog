@@ -14,7 +14,7 @@ smtp:
    - MAILNAME=${MAILNAME}
    - MYNETWORKS=${MYNETWORKS}
 strider:
-  image: "macropin/strider"
+  image: "emc/docker-strider"
   tty: true
   stdin_open: true
   ports:
