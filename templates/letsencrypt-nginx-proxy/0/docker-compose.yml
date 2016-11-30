@@ -3,6 +3,7 @@ version: '2'
 services:
   nginx:
     image: "nginx"
+    container_name: "nginx"
     tty: true
     stdin_open: true
     ports:
@@ -29,8 +30,8 @@ services:
       - ${SOCKET}:/tmp/docker.sock:ro
     links:
       - nginx
-    #command: "-config /etc/nginx/docker-gen/docker-gen.cfg"
-    command: "-notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/nginx.tmpl /etc/nginx/conf.d/default.conf"
+    command: "-config /etc/docker-gen/docker-gen.cfg"
+    #command: "-notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/nginx.tmpl /etc/nginx/conf.d/default.conf"
   letsencrypt:
     image: "munsio/rancher-letsencrypt-nginx-proxy-companion"
     tty: true
