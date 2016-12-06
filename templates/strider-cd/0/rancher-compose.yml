@@ -1,6 +1,6 @@
 .catalog:
   name: Strider CD
-  version: v0.0.7-rancher1
+  version: v0.0.15-rancher1
   description: |
     Strider Continuous Deployment agent
   maintainer: "Eric McNiece <emcniece@gmail.com>, Andrew Cutler <candrew@panubo.io>"
@@ -8,20 +8,23 @@
   questions:
     - variable: "DIR"
       label: "Storage directory"
-      description: "Path of shared storage to use for Strider, Mongo and Postfix. This should be available on all hosts"
+      description: "Path of shared storage to use for Strider, Mongo and Postfix. This should be available on all hosts. No trailing slash!"
       required: true
       type: "string"
     - variable: "STRIDER_PORT"
-      description: "Port that strider runs on, optional (defaults to 3000)"
+      description: "Port that strider runs on, optional. If left empty, Rancher will assign an available port."
       label: "Strider Port"
-      required: true
-      default: 3000
+      required: false
       type: "int"
-    - variable: "STRIDER_DOMAIN"
-      description: "Required; Address at which server will be accessible on the Internet. E.g. https://strider.example.com (note: no trailing slash)"
-      label: "Strider Domain"
+    - variable: "STRIDER_PREFIX"
+      description: "HTTP or HTTPS domain name prefix"
+      label: "Domain Prefix"
       required: true
-      type: "string"
+      type: "enum"
+      default: "http"
+      options:
+        - "http"
+        - "https"
     - variable: "STRIDER_FQDN"
       description: "FQDN, Domain without the prefix (eg. strider.example.com)"
       label: "Strider FQDN"
