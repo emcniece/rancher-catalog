@@ -12,7 +12,9 @@
       required: true
       type: "string"
     - variable: "STRIDER_PORT"
-      description: "Port that strider runs on, optional. If left empty, Rancher will assign an available port."
+      description: |
+        Port for HTTP traffic. Leave blank to let Rancher choose a random port.
+        If using Rancher >= 1.2.0, enter the desired public port (can be the same as other containers)
       label: "Strider Port"
       required: false
       type: "int"
