@@ -20,9 +20,12 @@
     - variable: "FORCE_SSL"
       label: "Force SSL"
       description: "Ensure that traffic is routed to 443. Disable if using a proxy in front of this container."
-      type: "boolean"
+      type: "enum"
       required: true
-      default: false
+      default: False
+      options:
+        - True
+        - False
     - variable: "ACME_EMAIL"
       label: "LetsEncrypt Email"
       description: "Used for certificate generation if paired with letsencrypt-nginx-proxy"
