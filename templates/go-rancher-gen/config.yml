@@ -1,0 +1,7 @@
+name: Go Rancher Generator
+description: |
+  Creates config files using the Rancher API
+version: 0.0.1
+category: System Management
+maintainer: "Eric McNiece <emcniece@gmail.com>"
+projectURL: https://github.com/CausticLab/go-rancher-gen

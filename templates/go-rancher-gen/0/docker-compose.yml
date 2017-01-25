@@ -1,0 +1,10 @@
+version: '2'
+services:
+  go-rancher-gen:
+    environment:
+      VIRTUAL_HOST: ${HOST}
+    tty: true
+    stdin_open: true
+    image: emcniece/go-rancher-gen:latest
+  labels:
+    io.rancher.container.pull_image: always

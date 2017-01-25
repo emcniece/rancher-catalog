@@ -1,0 +1,7 @@
+name: Taiga
+description: |
+  Project management platform for agile developers
+version: 0.0.1-rancher1
+category: Agile
+maintainer: "Eric McNiece <emcniece@gmail.com>, Community"
+projectURL: https://github.com/emcniece/rancher-catalog

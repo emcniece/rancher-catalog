@@ -1,0 +1,29 @@
+.catalog:
+  name: "Taiga"
+  version: "v0.1"
+  description: "Project management platform for agile developers"
+  uuid: taiga-0
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: "DOMAIN"
+      label: "Domain"
+      description: "Taiga domain name"
+      required: true
+      default: taiga.test.de
+      type: "string"
+    - variable: "DATA"
+      label: "Storage"
+      description: "path for storage. NO TRAILING SLASH."
+      required: true
+      default: /home/taiga/data
+      type: "string"
+    - variable: "FORCE_SSL"
+      label: "Force SSL"
+      description: "Ensure that traffic is routed to 443. Disable if using a proxy in front of this container."
+      required: true
+      default: false
+    - variable: "ACME_EMAIL"
+      label: "LetsEncrypt Email"
+      description: "Used for certificate generation if paired with letsencrypt-nginx-proxy"
+      required: false
+      type: "string"
