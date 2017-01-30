@@ -1,4 +1,4 @@
-nfs_server:
+nfshost:
   privileged: true
   image: erezhorev/dockerized_nfs_server
   volumes:

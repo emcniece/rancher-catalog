@@ -1,6 +1,6 @@
 .catalog:
-  name: "NFState"
-  version: "v0.0.2"
+  name: "nfsstate"
+  version: "v0.0.3"
   description: "Creates an NFS which is linked to a directory on the docker host machine."
   uuid: nfs-1
   questions:
@@ -22,5 +22,5 @@
       default: 2049
       required: true
       type: "int"  
-NFSState:
+nfshost:
   scale: 1
