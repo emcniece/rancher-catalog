@@ -1,0 +1,26 @@
+.catalog:
+  name: "NFState"
+  version: "v0.0.1"
+  description: "Creates an NFS which is linked to a directory on the docker host machine."
+  uuid: nfs-1
+  questions:
+    - variable: "LINK_DIR"
+      label: "Shared Host Directory"
+      description: "The directory on docker host that the NFS links to."
+      default: "/mnt/nfs"
+      required: true
+      type: "string"
+    - variable: "PORT_UDP"
+      label: "UDP Port Host Route"
+      description: "The UDP port on the docker host machine to be routed to container port."
+      default: 111
+      required: true
+      type: "int"
+    - variable: "PORT_TCP"
+      label: "TCP Port Host Route"
+      description: "The TCP port on the docker host machine to be routed to container port."
+      default: 2049
+      required: true
+      type: "int"  
+logrotate:
+  scale: 1
