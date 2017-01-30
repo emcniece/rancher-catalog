@@ -4,5 +4,5 @@ nfs_server:
   volumes:
     - ${LINK_DIR}:/exports:rw
   ports:
-    - ${PORT_UDP}:111:udp
-    - ${PORT_TCP}:2049:tcp
+    - ${PORT_UDP}:111
+    - ${PORT_TCP}:2049
