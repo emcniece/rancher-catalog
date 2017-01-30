@@ -1,7 +1,7 @@
 name: NFSHost
 description: |
   Creates an NFS which is linked to a directory on the docker host machine.
-version: 0.0.1
+version: 0.0.2
 category: Storage
 maintainer: "Eric McNiece, Steven Bjornson"
 projectURL: https://github.com/emcniece/rancher-catalog
