@@ -1,0 +1,20 @@
+.catalog:
+  name: "mongodb"
+  version: "v0.0.1"
+  description: "Creates a mongodb which is linked to the host for storage."
+  uuid: mongodb-1
+  questions:
+    - variable: "LINK_DIR"
+      label: "Shared Host Directory"
+      description: "The directory on docker host that the NFS links to."
+      default: "/var/lib/mongodb"
+      required: true
+      type: "string"
+    - variable: "PORT_TCP"
+      label: "TCP Port Host Route"
+      description: "The TCP port on the docker host machine to be routed to container port."
+      default: 27017
+      required: true
+      type: "int"
+mongodb:
+  scale: 1

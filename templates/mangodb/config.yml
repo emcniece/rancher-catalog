@@ -1,0 +1,7 @@
+name: mongodb
+description: |
+  Creates an MangoDb instance which is linked to a directory on the docker host machine.
+version: 0.0.1
+category: Database
+maintainer: "Eric McNiece, Chris Gat"
+projectURL: https://github.com/emcniece/rancher-catalog

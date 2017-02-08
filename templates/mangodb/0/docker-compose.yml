@@ -1,0 +1,6 @@
+mongodb:
+  image: sameersbn/mongodb
+  volumes:
+    - ${LINK_DIR}:/var/lib/mongodb
+  ports:
+    - ${PORT_TCP}:27017
