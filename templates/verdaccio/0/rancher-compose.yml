@@ -16,6 +16,8 @@
         Port for traffic. Leave blank to let Rancher choose a random port.
         If using Rancher >= 1.2.0, enter the desired public port (can be the same as other containers)
       label: "Port"
+      required: false
+      type: "int"
     - variable: "DOMAIN"
       description: "FQDN, Domain without the prefix (eg. strider.example.com). Gets set as an environment variable but does nothing."
       label: "Domain Name"
