@@ -1,0 +1,33 @@
+.catalog:
+  name: Concourse
+  version: v0.0.1
+  description: |
+    Continuous Integration
+  maintainer: "Eric McNiece <emcniece@gmail.com>"
+  uuid: concourse-0
+  questions:
+  - variable: "DIR"
+    label: "Storage Directory"
+    description: For storing access keys
+    required: false
+    type: "string"
+  - variable: "FQDN"
+    description: |
+      FQDN at which server will be accessible on the Internet.
+      E.g. concourse.example.com (no trailing slash)
+    label: "Domain Name"
+    required: true
+    type: "string"
+  - variable: "HTTP_METHOD"
+    label: Http Method"
+    required: true
+    type: "enum"
+    options:
+      - http
+      - https
+  - variable: "PORT"
+    description: |
+      Port for HTTP traffic. Forwards internally to 8888.
+    label: "HTTP Port"
+    required: true
+    type: "int"

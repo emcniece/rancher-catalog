@@ -1,0 +1,7 @@
+name: Concourse
+description: |
+  Continuous Integration
+version: 0.0.1
+category: Continuous Integration
+maintainer: "Eric McNiece <emcniece@gmail.com>"
+projectURL: https://github.com/emcniece/rancher-catalog

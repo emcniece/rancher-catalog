@@ -1,0 +1,45 @@
+version: '2'
+services:
+  concourse-db:
+    image: postgres:9.5
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_USER: concourse
+      POSTGRES_PASSWORD: concoursepw
+      PGDATA: /database
+
+  concourse-web:
+    image: concourse/concourse
+    links:
+      - concourse-db
+    command: web
+    ports:
+     - ${PORT}:8888
+    volumes:
+     - ${DIR}/keys/web:/concourse-keys
+    environment:
+      CONCOURSE_BASIC_AUTH_USERNAME: concourse
+      CONCOURSE_BASIC_AUTH_PASSWORD: concoursepw
+      CONCOURSE_EXTERNAL_URL: "${HTTP_METHOD}://${FQDN}:${PORT}"
+      CONCOURSE_POSTGRES_DATA_SOURCE: |-
+        postgres://concourse:concoursepw@concourse-db:5432/concourse?sslmode=disable
+    labels:
+      rgon.domain: ${HTTP_METHOD}://${FQDN}:${PORT}
+
+  concourse-worker:
+    image: concourse/concourse
+    privileged: true
+    links:
+     - concourse-web
+    command: worker
+    volumes:
+     - ${DIR}/keys/web:/concourse-keys
+    environment:
+      CONCOURSE_TSA_HOST: concourse-web
+
+concourse-db:
+  scale: 1
+concourse-web:
+  scale: 1
+concourse-worker:
+  scale: 1
