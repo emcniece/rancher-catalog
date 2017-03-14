@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: concourse
       POSTGRES_USER: concourse
-      POSTGRES_PASSWORD: concoursepw
+      POSTGRES_PASSWORD: changeme
       PGDATA: /database
 
   concourse-web:
@@ -19,10 +19,10 @@ services:
      - ${DIR}/keys/web:/concourse-keys
     environment:
       CONCOURSE_BASIC_AUTH_USERNAME: concourse
-      CONCOURSE_BASIC_AUTH_PASSWORD: concoursepw
+      CONCOURSE_BASIC_AUTH_PASSWORD: changeme
       CONCOURSE_EXTERNAL_URL: "${HTTP_METHOD}://${FQDN}:${PORT}"
       CONCOURSE_POSTGRES_DATA_SOURCE: |-
-        postgres://concourse:concoursepw@concourse-db:5432/concourse?sslmode=disable
+        postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable
     labels:
       rgon.domain: ${FQDN}
 
