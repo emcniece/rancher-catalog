@@ -1,6 +1,6 @@
 .catalog:
   name: Concourse
-  version: v0.0.3
+  version: v0.0.4
   description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: cc-0
@@ -10,20 +10,13 @@
     description: For storing access keys
     required: false
     type: "string"
-  - variable: "FQDN"
+  - variable: "DOMAIN_NAME"
     description: |
-      FQDN at which server will be accessible on the Internet.
-      E.g. concourse.example.com (no trailing slash)
-    label: "Domain Name"
+      Domain at which server will be accessible on the Internet.
+      E.g. https://concourse.example.com (no trailing slash). Include a port if needed for access.
+    label: "Full Domain Name"
     required: true
     type: "string"
-  - variable: "HTTP_METHOD"
-    label: Http Method
-    required: true
-    type: "enum"
-    options:
-      - http
-      - https
   - variable: "PORT"
     description: |
       Port for HTTP traffic. Forwards internally to 8888.
@@ -42,3 +35,18 @@
     required: true
     type: "password"
     default: "changeme"
+  - variable: "GITHUB_CLIENT_ID"
+    label: "Github Client ID"
+    description: For enabling Github OAuth. Callback is https://domain.com/auth/github/callback
+    required: false
+    type: "string"
+    default: "concourse"
+  - variable: "GITHUB_CLIENT_SECRET"
+    label: "Github Client Secret"
+    required: true
+    type: "password"
+  - variable: "GITHUB_AUTH_TEAM"
+    label: "Github Team"
+    description: Name of your team (ie. concourse/Pivotal)
+    required: false
+    type: "string"
