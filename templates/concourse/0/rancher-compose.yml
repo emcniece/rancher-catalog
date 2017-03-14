@@ -18,7 +18,7 @@
     required: true
     type: "string"
   - variable: "HTTP_METHOD"
-    label: Http Method"
+    label: Http Method
     required: true
     type: "enum"
     options:
@@ -40,5 +40,5 @@
     label: "Login Password"
     description: Password for first login (defaults to "changeme")
     required: true
-    type: "string"
+    type: "password"
     default: "changeme"
