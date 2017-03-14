@@ -40,10 +40,9 @@
     description: For enabling Github OAuth. Callback is https://domain.com/auth/github/callback
     required: false
     type: "string"
-    default: "concourse"
   - variable: "GITHUB_CLIENT_SECRET"
     label: "Github Client Secret"
-    required: true
+    required: false
     type: "password"
   - variable: "GITHUB_AUTH_TEAM"
     label: "Github Team"
