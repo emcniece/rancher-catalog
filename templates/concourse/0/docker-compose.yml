@@ -18,8 +18,8 @@ services:
     volumes:
      - ${DIR}/keys/web:/concourse-keys
     environment:
-      CONCOURSE_BASIC_AUTH_USERNAME: concourse
-      CONCOURSE_BASIC_AUTH_PASSWORD: changeme
+      CONCOURSE_BASIC_AUTH_USERNAME: ${USER}
+      CONCOURSE_BASIC_AUTH_PASSWORD: ${PASSWORD}
       CONCOURSE_EXTERNAL_URL: "${HTTP_METHOD}://${FQDN}:${PORT}"
       CONCOURSE_POSTGRES_DATA_SOURCE: |-
         postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable

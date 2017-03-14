@@ -1,10 +1,9 @@
 .catalog:
   name: Concourse
-  version: v0.0.2
-  description: |
-    CI that scales with your project.
+  version: v0.0.3
+  description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
-  uuid: concourse-0
+  uuid: cc-0
   questions:
   - variable: "DIR"
     label: "Storage Directory"
@@ -31,3 +30,15 @@
     label: "HTTP Port"
     required: true
     type: "int"
+  - variable: "USER"
+    label: "Login Username"
+    description: Default username for first login
+    required: true
+    type: "string"
+    default: "concourse"
+  - variable: "PASSWORD"
+    label: "Login Password"
+    description: Password for first login (defaults to "changeme")
+    required: true
+    type: "string"
+    default: "changeme"
