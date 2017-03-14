@@ -1,6 +1,6 @@
 name: Concourse
 description: |
-  Continuous Integration
+  CI that scales with your project.
 version: 0.0.2
 category: Continuous Integration
 maintainer: "Eric McNiece <emcniece@gmail.com>"

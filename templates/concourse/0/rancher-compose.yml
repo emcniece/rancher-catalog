@@ -2,7 +2,7 @@
   name: Concourse
   version: v0.0.2
   description: |
-    Continuous Integration
+    CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: concourse-0
   questions:
