@@ -14,7 +14,7 @@ services:
       - concourse-db
     command: web
     ports:
-     - ${PORT}:8888
+     - ${PORT}:8080
     volumes:
      - ${DIR}/keys/web:/concourse-keys
     environment:
@@ -24,7 +24,7 @@ services:
       CONCOURSE_POSTGRES_DATA_SOURCE: |-
         postgres://concourse:concoursepw@concourse-db:5432/concourse?sslmode=disable
     labels:
-      rgon.domain: ${HTTP_METHOD}://${FQDN}:${PORT}
+      rgon.domain: ${FQDN}
 
   concourse-worker:
     image: concourse/concourse
