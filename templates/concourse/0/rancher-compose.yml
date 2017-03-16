@@ -23,7 +23,7 @@
     label: "Full Domain String"
     required: true
     type: "string"
-- variable: "FQDN"
+  - variable: "FQDN"
     description: |
       Base domain at which server will be accessible on the Internet.
       E.g. concourse.example.com
