@@ -1,6 +1,6 @@
 .catalog:
   name: Concourse
-  version: v0.0.6
+  version: v0.0.7
   description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: cc-0
@@ -10,19 +10,26 @@
     description: For storing access keys
     required: false
     type: "string"
-  - variable: "DOMAIN_NAME"
-    description: |
-      Domain at which server will be accessible on the Internet.
-      E.g. https://concourse.example.com (no trailing slash). Include a port if needed for access.
-    label: "Full Domain Name"
-    required: true
-    type: "string"
   - variable: "PORT"
     description: |
-      Port for HTTP traffic. Forwards internally to 8888.
+      Port for HTTP traffic, leave blank for random. Forwards internally to 8888.
     label: "HTTP Port"
     required: false
     type: "int"
+  - variable: "DOMAIN_NAME"
+    description: |
+      Domain at which server will be accessible on the Internet.
+      E.g. https://concourse.example.com:12345 (no trailing slash). Only include a port if needed for external access.
+    label: "Full Domain String"
+    required: true
+    type: "string"
+- variable: "FQDN"
+    description: |
+      Base domain at which server will be accessible on the Internet.
+      E.g. concourse.example.com
+    label: "FQDN (Domain Name)"
+    required: true
+    type: "string"
   - variable: "USER"
     label: "Login Username"
     description: Default username for first login
