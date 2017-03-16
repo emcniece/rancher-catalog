@@ -1,6 +1,6 @@
 .catalog:
   name: "Registry"
-  version: "v0.1.0"
+  version: "v0.1.1"
   description: "Docker Registry"
   uuid: registry-2
   questions:
@@ -38,6 +38,12 @@
       description: "FQDN of server.  This should be the CN in the certificates and will be the URL to contact the Registry and Web interface"
       required: true
       type: "string"
+    - variable: "TOKEN_REALM"
+      label: "Registry Token Realm"
+      description: "The publically-accessible token path. Probably https://domain.com/v2/token but might need a custom port."
+      required: true
+      type: "string"
+      default: "https://domain.com/v2/token"
     - variable: "LDAP"
       label: "LDAP Enabled"
       description: "Enable LDAP authentication"
