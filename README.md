@@ -1,4 +1,4 @@
-#emcniece/rancher-catalog
+#emcniece/rancher-catalog#
 
 A catalog for Rancher which currently includes:
 
@@ -13,7 +13,7 @@ A catalog for Rancher which currently includes:
 
 Enable this catalog by browsing to your Rancher installation at `/admin/settings` and add https://github.com/emcniece/rancher-catalog as a new catalog entry.
 
-##TODO
+##TODO##
 
   - Add template field to letsencrypt rancher-compose
   - Test if strider-cd stack adds smtp link properly on creation
