@@ -1,5 +1,10 @@
 version: '2'
 services:
+  concourse-keygen:
+    image: emcniece/concourse-keygen
+    volumes:
+      - ${DIR}/keys/web:/concourse-keys
+
   concourse-db:
     image: postgres:9.5
     environment:
@@ -14,8 +19,10 @@ services:
     command: web
     ports:
      - ${PORT}:8080
-    volumes:
-     - ${DIR}/keys/web:/concourse-keys
+    volumes_from:
+      - concourse-keygen
+    #volumes:
+    # - ${DIR}/keys/web:/concourse-keys
     environment:
       CONCOURSE_BASIC_AUTH_USERNAME: ${USER}
       CONCOURSE_BASIC_AUTH_PASSWORD: ${PASSWORD}
@@ -33,8 +40,10 @@ services:
     privileged: true
     links: [concourse-web]
     command: worker
-    volumes:
-     - ${DIR}/keys/worker:/concourse-keys
+    volumes_from:
+      - concourse-keygen
+    #volumes:
+    # - ${DIR}/keys/worker:/concourse-keys
     environment:
       CONCOURSE_TSA_HOST: concourse-web
 
