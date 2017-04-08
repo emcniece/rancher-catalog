@@ -1,6 +1,6 @@
 .catalog:
   name: Concourse
-  version: v0.0.7
+  version: 0.0.8
   description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: cc-0
@@ -12,14 +12,14 @@
     type: "string"
   - variable: "PORT"
     description: |
-      Port for HTTP traffic, leave blank for random. Forwards internally to 8888.
+      Port for HTTP traffic, leave blank for random. Forwards internally to 8080.
     label: "HTTP Port"
     required: false
     type: "int"
   - variable: "DOMAIN_NAME"
     description: |
       Domain at which server will be accessible on the Internet.
-      E.g. https://concourse.example.com:12345 (no trailing slash). Only include a port if needed for external access.
+      E.g. https://concourse.example.com:8080 (no trailing slash). Only include a port if needed for external access.
     label: "Full Domain String"
     required: true
     type: "string"
