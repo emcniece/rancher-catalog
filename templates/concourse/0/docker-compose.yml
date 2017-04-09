@@ -1,5 +1,11 @@
 version: '2'
 services:
+  concourse-keygen:
+    image: emcniece/concourse-keygen
+    volumes:
+      - ${DIR}:/concourse-keys
+    command: tail -f /dev/null
+
   concourse-db:
     image: postgres:9.5
     environment:
@@ -10,9 +16,7 @@ services:
 
   concourse-web:
     image: concourse/concourse
-    links:
-      - concourse-db:concourse-db
-      - concourse-worker:concourse-worker
+    links: [concourse-db]
     command: web
     ports:
      - ${PORT}:8080
@@ -33,17 +37,11 @@ services:
   concourse-worker:
     image: concourse/concourse
     privileged: true
-    links:
-     - concourse-web:concourse-web
+    links: [concourse-web]
     command: worker
     volumes:
-     - ${DIR}/keys/web:/concourse-keys
+     - ${DIR}/keys/worker:/concourse-keys
     environment:
       CONCOURSE_TSA_HOST: concourse-web
-
-concourse-db:
-  scale: 1
-concourse-web:
-  scale: 1
-concourse-worker:
-  scale: 1
+    labels:
+      io.rancher.scheduler.global: ${GLOBAL}
