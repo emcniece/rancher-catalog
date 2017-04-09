@@ -4,6 +4,7 @@ services:
     image: emcniece/concourse-keygen
     volumes:
       - ${DIR}:/concourse-keys
+    command: tail -f /dev/null
 
   concourse-db:
     image: postgres:9.5
@@ -42,3 +43,5 @@ services:
      - ${DIR}/keys/worker:/concourse-keys
     environment:
       CONCOURSE_TSA_HOST: concourse-web
+    labels:
+      io.rancher.scheduler.global: ${GLOBAL}

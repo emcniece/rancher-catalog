@@ -1,6 +1,6 @@
 .catalog:
   name: Concourse
-  version: 0.0.10
+  version: 0.0.11
   description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: cc-0
@@ -30,6 +30,11 @@
     label: "FQDN (Domain Name)"
     required: true
     type: "string"
+  - variable: "GLOBAL"
+    description: "Deploy a worker on every host (easy shortcut for large deploy, set false for manual scaling)"
+    label: "Global Workers"
+    required: true
+    type: "boolean"
   - variable: "USER"
     label: "Login Username"
     description: Default username for first login
