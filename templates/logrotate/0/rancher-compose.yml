@@ -10,5 +10,10 @@
       default: "/var/lib/docker/containers"
       required: true
       type: "string"
+    - variable: "GLOBAL"
+      label: "Global Deploy"
+      description: "Add to all servers"
+      default: true
+      type: "boolean"
 logrotate:
   scale: 1
