@@ -1,6 +1,6 @@
 .catalog:
   name: "Tutum LogRotate"
-  version: "v0.0.1"
+  version: "0.0.1"
   description: "Truncates container logs when they grow in size to avoid filling up the disk"
   uuid: logrotate-1
   questions:
