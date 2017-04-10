@@ -26,11 +26,11 @@
     type: "boolean"
     default: false
   - variable: "REDIRECT"
-      label: "RGON Redirect"
-      description: "Enable http/https redirects for RGON-Proxy"
-      required: false
-      default: "http"
-      type: "enum"
-      options:
-        - http
-        - https
+    label: "RGON Redirect"
+    description: "Enable http/https redirects for RGON-Proxy"
+    required: false
+    default: "http"
+    type: "enum"
+    options:
+      - http
+      - https
