@@ -1,6 +1,6 @@
 .catalog:
   name: WP SQLite
-  version: v0.0.1
+  version: 0.0.1
   description: |
     WordPress with SQLite backend
   maintainer: "Eric McNiece <emcniece@gmail.com>"
