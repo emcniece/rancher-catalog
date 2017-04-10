@@ -1,0 +1,7 @@
+name: WP-SQLite
+description: |
+  WordPress with SQLite backend
+version: 0.0.1
+category: blogging
+maintainer: "Eric McNiece <emcniece@gmail.com>"
+projectURL: https://github.com/emcniece/rancher-catalog

@@ -1,0 +1,36 @@
+.catalog:
+  name: WP SQLite
+  version: v0.0.1
+  description: |
+    WordPress with SQLite backend
+  maintainer: "Eric McNiece <emcniece@gmail.com>"
+  uuid: wp-sqlite-0
+  questions:
+  - variable: "PORT"
+    description: |
+      Port for HTTP traffic. Leave blank to let Rancher choose a random port.
+    label: "HTTP Port"
+    required: false
+    type: "int"
+  - variable: "DOMAIN"
+    description: |
+      FQDN at which server will be accessible on the Internet.
+      E.g. mysite.example.com
+    label: "Domain Name"
+    required: false
+    type: "string"
+  - variable: "SSL"
+    description: "Enable SSL for RGON-Proxy"
+    label: "RGON SSL"
+    required: false
+    type: "boolean"
+    default: false
+  - variable: "REDIRECT"
+      label: "RGON Redirect"
+      description: "Enable http/https redirects for RGON-Proxy"
+      required: false
+      default: "http"
+      type: "enum"
+      options:
+        - http
+        - https
