@@ -1,6 +1,6 @@
 .catalog:
   name: Concourse
-  version: 0.0.11
+  version: 0.0.11-2worker
   description: CI that scales with your project.
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: cc-0
@@ -56,8 +56,47 @@
     description: Name of your team (ie. concourse/Pivotal)
     required: false
     type: "string"
-  - variable: "GLOBAL"
-    description: "Deploy a worker on every host (easy shortcut for large deploy, set false for manual scaling)"
-    label: "Global Workers"
+
+  - variable: "WORKER1_GLOBAL"
+    description: "Deploy Worker1 set on every host"
+    label: "Worker 1 Global"
     required: true
     type: "boolean"
+    default: false
+  - variable: "WORKER1_TAG"
+    description: "Set tags on Concourse workers"
+    label: "Worker 1 Tag"
+    required: false
+    type: "string"
+  - variable: "WORKER1_INCLUDE"
+    description: "Set io.rancher.scheduler.affinity:host_label for worker group"
+    label: "Worker 1 Host Label Include"
+    required: false
+    type: "string"
+  - variable: "WORKER1_EXCLUDE"
+    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group"
+    label: "Worker 1 Host Label Exclude"
+    required: false
+    type: "string"
+
+  - variable: "WORKER2_GLOBAL"
+    description: "Deploy Worker2 set on every host"
+    label: "Worker 2 Global"
+    required: true
+    type: "boolean"
+    default: false
+  - variable: "WORKER2_TAG"
+    description: "Set tags on Concourse workers"
+    label: "Worker 2 Tag"
+    required: false
+    type: "string"
+  - variable: "WORKER2_INCLUDE"
+    description: "Set io.rancher.scheduler.affinity:host_label for worker group"
+    label: "Worker 2 Host Label Include"
+    required: false
+    type: "string"
+  - variable: "WORKER2_EXCLUDE"
+    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group"
+    label: "Worker 2 Host Label Exclude"
+    required: false
+    type: "string"
