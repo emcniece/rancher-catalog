@@ -4,3 +4,5 @@ logrotate:
   stdin_open: true
   volumes:
     - ${LOG_DIR}:/var/lib/docker/containers:rw
+  labels:
+    io.rancher.scheduler.global: "${GLOBAL}"
