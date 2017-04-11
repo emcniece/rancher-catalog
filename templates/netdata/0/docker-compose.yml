@@ -10,5 +10,7 @@ services:
     - /proc:/host/proc:ro
     - /sys:/host/sys:ro
     - ${DIR}/netdata.conf:/etc/netdata/netdata.conf
+    ports:
+    - ${NETDATA_PORT}:${NETDATA_PORT}
     environment:
       NETDATA_PORT: "${NETDATA_PORT}"
