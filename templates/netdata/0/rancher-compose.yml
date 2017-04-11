@@ -11,7 +11,7 @@
       default: 19999
     - variable: DIR
       label: Config Directory
-      description: Directory to store config in, accessible on each host
+      description: Directory to volume config file, accessible on each host. NO TRAILING SLASH
       required: true
       type: "string"
       default: "/root/netdata"
