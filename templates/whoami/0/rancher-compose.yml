@@ -1,6 +1,6 @@
 .catalog:
   name: WhoAmI
-  version: v0.0.1-rancher1
+  version: 0.0.1
   description: |
     Container identification helper
   maintainer: "Eric McNiece <emcniece@gmail.com>"

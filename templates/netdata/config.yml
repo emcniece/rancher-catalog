@@ -1,6 +1,6 @@
-name: WhoAmI
+name: NetData
 description: |
-  Container identification helper
+  Real-time performance monitoring, done righter - with a registry node!
 version: 0.0.1
 category: System Management
 maintainer: "Eric McNiece <emcniece@gmail.com>"

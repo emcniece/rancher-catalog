@@ -1,0 +1,19 @@
+.catalog:
+  name: netdata
+  version: 0.0.1
+  description: Real-time performance monitoring, done righter - with a registry node!
+  questions:
+    - variable: NETDATA_PORT
+      label: Port
+      description: Container port to access netdata
+      required: true
+      type: "int"
+      default: 19999
+    - variable: DIR
+      label: Config Directory
+      description: Directory to store config in, accessible on each host
+      required: true
+      type: "string"
+      default: "/root/netdata"
+netdata:
+  scale: 1
