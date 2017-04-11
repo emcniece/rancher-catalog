@@ -1,11 +1,6 @@
 version: '2'
 services:
   wordpress:
-    environment:
-      VIRTUAL_HOST: ${HOST}
-      VIRTUAL_PORT: ${PORT}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-      LETSENCRYPT_HOST: ${HOST}
     tty: true
     stdin_open: true
     image: emcniece/wp-php7-nginx:latest
@@ -15,3 +10,7 @@ services:
       - ${DIR}/import:/var/www/import
     ports:
       - ${PORT}:80
+    labels:
+      - rgon.ssl: ${SSL}
+      - rgon.domain: ${HOST}
+      - rgon.redirect: ${REDIRECT}

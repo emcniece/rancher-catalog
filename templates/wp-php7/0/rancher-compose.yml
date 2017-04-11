@@ -2,7 +2,7 @@
   name: WordPress PHP7
   version: 0.0.1
   description: |
-    Strider Continuous Deployment agent
+    One-click WordPress w/ PHP7-FPM, Redis, Nginx
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: wp-php7-0
   questions:
@@ -18,12 +18,22 @@
       required: false
       type: "int"
     - variable: "HOST"
-      description: "Hostname for WordPress (FQDN)"
+      description: "RGON-Proxy Hostname for WordPress (FQDN)"
       label: "Hostname"
       required: false
       type: "string"
-    - variable: "LETSENCRYPT_EMAIL"
-      description: "Adds the `LETSENCRYPT_EMAIL` environment variable"
-      label: "Let's Encrypt Email Address"
+    - variable: "SSL"
+      description: "Enable RGON-Proxy SSL certificate"
+      label: "SSL Certificate"
+      required: true
+      type: "boolean"
+      default: false
+    - variable: "REDIRECT"
+      label: "HTTPS Redirect"
+      description: "Enable http/https redirects for RGON-Proxy"
       required: false
-      type: "string"
+      default: "http"
+      type: "enum"
+      options:
+        - http
+        - https
