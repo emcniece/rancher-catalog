@@ -9,6 +9,6 @@ services:
     volumes:
     - /proc:/host/proc:ro
     - /sys:/host/sys:ro
-    - ${DIR}/etc/netdata/
+    - ${DIR}:/etc/netdata/
     environment:
       NETDATA_PORT: "${NETDATA_PORT}"

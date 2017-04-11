@@ -1,6 +1,6 @@
 .catalog:
   name: netdata
-  version: 0.0.1
+  version: 0.0.2
   description: Real-time performance monitoring, done righter - with a registry node!
   questions:
     - variable: NETDATA_PORT
