@@ -1,19 +1,19 @@
-#emcniece/rancher-catalog
+# emcniece/rancher-catalog
 
 A catalog for Rancher which currently includes:
 
-- StriderCD
 - Apt-Cacher-NG
+- Concourse CI
 - Let's Encrypt Nginx Proxy
+- Logrotate
 - Nginx-Friendly Docker Registry
-- LogRotate
+- StriderCD
+- Verdaccio NPM Proxy/Registry
 - WhoAmI
 
 Enable this catalog by browsing to your Rancher installation at `/admin/settings` and add https://github.com/emcniece/rancher-catalog as a new catalog entry.
 
-##TODO
+## TODO
 
-  - Get the rancher-compose for letsencrypt to set network mode for the nginx container to "Host" from the UI dropdown
-  - Convert docker-gen template to labels instead of variables
   - Add template field to letsencrypt rancher-compose
   - Test if strider-cd stack adds smtp link properly on creation
