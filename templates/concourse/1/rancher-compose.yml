@@ -57,6 +57,12 @@
     required: false
     type: "string"
 
+  - variable: "WEB_INCLUDE"
+    description: "Set io.rancher.scheduler.affinity:host_label for web UI group (in the format key1=value1,key2=value2)"
+    label: "Web Host Label Include"
+    required: false
+    type: "string"
+
   - variable: "WORKER1_GLOBAL"
     description: "Deploy Worker1 set on every host"
     label: "Worker 1 Global"
@@ -69,12 +75,12 @@
     required: false
     type: "string"
   - variable: "WORKER1_INCLUDE"
-    description: "Set io.rancher.scheduler.affinity:host_label for worker group"
+    description: "Set io.rancher.scheduler.affinity:host_label for worker group (in the format key1=value1,key2=value2)"
     label: "Worker 1 Host Label Include"
     required: false
     type: "string"
   - variable: "WORKER1_EXCLUDE"
-    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group"
+    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group (in the format key1=value1,key2=value2)"
     label: "Worker 1 Host Label Exclude"
     required: false
     type: "string"
@@ -91,12 +97,12 @@
     required: false
     type: "string"
   - variable: "WORKER2_INCLUDE"
-    description: "Set io.rancher.scheduler.affinity:host_label for worker group"
+    description: "Set io.rancher.scheduler.affinity:host_label for worker group (in the format key1=value1,key2=value2)"
     label: "Worker 2 Host Label Include"
     required: false
     type: "string"
   - variable: "WORKER2_EXCLUDE"
-    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group"
+    description: "Set io.rancher.scheduler.affinity:host_label_ne for worker group (in the format key1=value1,key2=value2)"
     label: "Worker 2 Host Label Exclude"
     required: false
     type: "string"

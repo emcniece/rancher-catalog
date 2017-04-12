@@ -5,6 +5,8 @@ services:
     volumes:
       - ${DIR}:/concourse-keys
     command: tail -f /dev/null
+    labels:
+      io.rancher.scheduler.affinity:host_label: "${WEB_INCLUDE}"
 
   concourse-db:
     image: postgres:9.5
@@ -13,6 +15,8 @@ services:
       POSTGRES_USER: concourse
       POSTGRES_PASSWORD: concoursedbpw
       PGDATA: /database
+    labels:
+      io.rancher.scheduler.affinity:host_label: "${WEB_INCLUDE}"
 
   concourse-web:
     image: concourse/concourse
@@ -33,6 +37,7 @@ services:
       CONCOURSE_GITHUB_AUTH_TEAM: ${GITHUB_AUTH_TEAM}
     labels:
       rgon.domain: ${FQDN}
+      io.rancher.scheduler.affinity:host_label: "${WEB_INCLUDE}"
 
   concourse-worker1:
     image: concourse/concourse
