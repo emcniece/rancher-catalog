@@ -1,6 +1,6 @@
-# NetData
+# NetData Plus
 
-Real-time performance monitoring, done righter - with a registry node!
+Real-time performance monitoring, with exposed config!
 
 Select a volume location, then edit a single node's config file and restart.
 
