@@ -36,6 +36,12 @@
       required: true
       type: "password"
       default: "wordpress"
+    - variable: "INNODB_BUF"
+      description: "Default pool size is often too large for small nodes - set to 20M if this container runs out of memory"
+      label: "InnoDB Buffer Pool Size (MB)"
+      required: true
+      type: "integer"
+      default: "20"
 
     - variable: "HOST"
       description: "RGON-Proxy Hostname for WordPress (FQDN)"

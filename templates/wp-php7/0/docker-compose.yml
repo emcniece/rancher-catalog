@@ -23,6 +23,9 @@ services:
 
   mysql:
     image: mariadb
+    command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
+    volumes:
+      - ${DIR}/mariadb:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
