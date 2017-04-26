@@ -10,9 +10,8 @@ services:
       - ${DIR}/wordpress:/var/www/wordpress
     ports:
       - ${PORT}:80
-    links: [mysql]
     environment:
-      MYSQL_HOST: mysql
+      MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_NAME}
       MYSQL_PASSWORD: ${MYSQL_PASS}
@@ -20,11 +19,3 @@ services:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
       rgon.redirect: ${REDIRECT}
-
-  mysql:
-    image: mariadb
-    environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_DATABASE: ${MYSQL_NAME}
-      MYSQL_PASSWORD: ${MYSQL_PASS}

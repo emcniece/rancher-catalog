@@ -1,6 +1,6 @@
 .catalog:
   name: WordPress PHP7
-  version: 0.0.1-mysql
+  version: 0.0.1-no-mysql
   description: |
     One-click WordPress w/ PHP7-FPM, Redis, Nginx
   maintainer: "Eric McNiece <emcniece@gmail.com>"
@@ -18,6 +18,11 @@
       required: false
       type: "int"
 
+    - variable: "MYSQL_HOST"
+      description: "Database Host"
+      label: "DB Host"
+      required: true
+      type: "string"
     - variable: "MYSQL_NAME"
       description: "Database Name"
       label: "DB Name"

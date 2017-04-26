@@ -3,9 +3,9 @@
 One-click WordPress w/ PHP7-FPM, Redis, Nginx
 
 
-## With MySQL
+## No MySQL
 
-Includes a MySQL container - use the `-no-mysql` version to use an external database.
+Does not include a MySQL container - use the `-mysql` version to include a database.
 
 ## Volumes
 
