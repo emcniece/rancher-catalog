@@ -1,11 +1,11 @@
-# WordPress PHP7
+# WordPress PHP7 MySQL
 
 One-click WordPress w/ PHP7-FPM, Redis, Nginx
 
 
-## No MySQL
+## With MySQL
 
-Does not include a MySQL container - use the other catalog item to include a database.
+Includes a MySQL container - use the other catalog item to use an remote database.
 
 ## Volumes
 
