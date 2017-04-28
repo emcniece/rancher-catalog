@@ -1,6 +1,6 @@
 .catalog:
   name: WordPress PHP7 MySQL
-  version: 0.0.1
+  version: 0.0.2
   description: |
     One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
   maintainer: "Eric McNiece <emcniece@gmail.com>"
