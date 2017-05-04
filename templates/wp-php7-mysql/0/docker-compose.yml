@@ -16,6 +16,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_NAME}
       MYSQL_PASSWORD: ${MYSQL_PASS}
+      SSL_ENABLED: ${SSL}
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
