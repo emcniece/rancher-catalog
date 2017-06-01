@@ -95,21 +95,12 @@
       required: true
       default: "0.0.0.0"
 
-    - variable: "GLOBAL"
-      label: "Global Deploy"
-      description: "Add to all servers"
-      default: true
-      type: "boolean"
-    - variable: DOMAIN
-      label: RGON Proxy Domain Name
-      description: Domain name label (rgon.domain)
-      type: "string"
-    - variable: "SSL"
+    - variable: RGON_SSL
       label: "RGON Proxy Enable SSL"
       description: "Allow RGON Proxy to obtain ACME SSL certs for the domain name"
       default: false
       type: "boolean"
-    - variable: "HTTPS"
+    - variable: RGON_REDIRECT
       description: "HTTP or HTTPS domain name prefix"
       label: "RGON Proxy HTTPS Redirect"
       required: true

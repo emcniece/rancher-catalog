@@ -259,7 +259,8 @@ services:
           - nginx
     labels:
       rgon.domain: ${MAILCOW_HOSTNAME}
-      rgon.
+      rgon.ssl: ${RGON_SSL}
+      rgon.redirect: '${RGON_REDIRECT}'
 
   ipv6nat:
     image: robbertkl/ipv6nat
