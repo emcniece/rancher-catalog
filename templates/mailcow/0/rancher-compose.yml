@@ -1,0 +1,122 @@
+.catalog:
+  name: mailcow
+  version: 0.0.1
+  description: mailserver suite
+  questions:
+    - variable: MAILCOW_HOSTNAME
+      label: Hostname
+      type: "string"
+      required: true
+      description: "FQDN, mail.mysite.com"
+    - variable: TZ
+      label: Timezone
+      type: "string"
+      required: true
+      default: "America/Vancouver"
+      description: "Format: Europe/Berlin"
+
+    - variable: DBROOT
+      label: DB Root Password
+      required: true
+      type: "password"
+      default: mailcow
+    - variable: DBNAME
+      label: Database Name
+      required: true
+      type: "string"
+      default: "mailcow"
+    - variable: DBUSER
+      label: Database User Name
+      required: true
+      type: "string"
+      default: "mailcow"
+    - variable: DBPASS
+      label: Database User Password
+      required: true
+      type: "password"
+      default: "mailcow"
+
+    - variable: IMAP_PORT
+      label: IMAP Port
+      required: true
+      type: "int"
+      default: 143
+    - variable: IMAPS_PORT
+      label: IMAPS Port
+      required: true
+      type: "int"
+      default: 993
+    - variable: POP_PORT
+      label: POP Port
+      required: true
+      type: "int"
+      default: 110
+    - variable: POPS_PORT
+      label: POPS Port
+      required: true
+      type: "int"
+      default: 995
+    - variable: SIEVE_PORT
+      label: SIEVE Port
+      required: true
+      type: "int"
+      default: 4190
+    - variable: SMTP_PORT
+      label: SMTP Port
+      required: true
+      type: "int"
+      default: 25
+    - variable: SMTPS_PORT
+      label: SMTPS Port
+      required: true
+      type: "int"
+      default: 465
+    - variable: SUBMISSION_PORT
+      label: Submission Port
+      required: true
+      type: "int"
+      default: 587
+    - variable: HTTP_PORT
+      label: HTTP Port
+      type: "int"
+      default: 80
+    - variable: HTTPS_PORT
+      label: HTTPS Port
+      type: "int"
+      default: 443
+    - variable: HTTP_BIND
+      label: HTTP Bind
+      type: "string"
+      required: true
+      default: "0.0.0.0"
+    - variable: HTTPS_BIND
+      label: HTTPS Bind
+      type: "string"
+      required: true
+      default: "0.0.0.0"
+
+    - variable: "GLOBAL"
+      label: "Global Deploy"
+      description: "Add to all servers"
+      default: true
+      type: "boolean"
+    - variable: DOMAIN
+      label: RGON Proxy Domain Name
+      description: Domain name label (rgon.domain)
+      type: "string"
+    - variable: "SSL"
+      label: "RGON Proxy Enable SSL"
+      description: "Allow RGON Proxy to obtain ACME SSL certs for the domain name"
+      default: false
+      type: "boolean"
+    - variable: "HTTPS"
+      description: "HTTP or HTTPS domain name prefix"
+      label: "RGON Proxy HTTPS Redirect"
+      required: true
+      type: "enum"
+      default: "http"
+      options:
+        - "http"
+        - "https"
+netdata:
+  scale: 1
