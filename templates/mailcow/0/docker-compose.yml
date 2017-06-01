@@ -2,11 +2,11 @@ version: '2'
 #version: '2.1'
 
 services:
-  bind9-mailcow:
+  bind9:
     image: resystit/bind9
     command: "named -c /etc/bind/named.conf -g -u named"
     depends_on:
-      - mysql-mailcow
+      - mysql
     #volumes:
     #  - ./data/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
@@ -16,7 +16,7 @@ services:
         aliases:
           - bind9
 
-  mysql-mailcow:
+  mysql:
     image: mariadb:10.1
     #healthcheck:
     #  test: ["CMD", "mysqladmin", "ping", "--host", "localhost", "--silent"]
@@ -40,10 +40,10 @@ services:
         aliases:
           - mysql
 
-  redis-mailcow:
+  redis:
     image: redis:alpine
     depends_on:
-      - bind9-mailcow
+      - bind9
     volumes:
       - redis-vol-1:/data/
     restart: always
@@ -55,7 +55,7 @@ services:
         aliases:
           - redis
 
-  clamd-mailcow:
+  clamd:
     image: mailcow/clamd
     restart: always
     dns:
@@ -66,7 +66,7 @@ services:
         aliases:
           - clamd
 
-  rspamd-mailcow:
+  rspamd:
     image: mailcow/rspamd
     command: > 
       /bin/bash -c "
@@ -74,7 +74,7 @@ services:
       /usr/bin/rspamd -f -u _rspamd -g _rspamd
       "
     depends_on:
-      - nginx-mailcow
+      - nginx
     volumes:
       #- ./data/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
       #- ./data/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
@@ -91,12 +91,12 @@ services:
         aliases:
           - rspamd
 
-  php-fpm-mailcow:
+  php-fpm:
     image: mailcow/phpfpm
     command: "php-fpm -d date.timezone=${TZ}"
     depends_on:
-      - bind9-mailcow
-      - redis-mailcow
+      - bind9
+      - redis
     volumes:
       #- ./data/web:/web:ro
       #- ./data/conf/rspamd/dynmaps:/dynmaps:ro
@@ -115,10 +115,10 @@ services:
         aliases:
           - phpfpm
 
-  sogo-mailcow:
+  sogo:
     image: mailcow/sogo
     depends_on:
-      - bind9-mailcow
+      - bind9
     environment:
       - DBNAME=${DBNAME}
       - DBUSER=${DBUSER}
@@ -136,10 +136,10 @@ services:
         aliases:
           - sogo
 
-  rmilter-mailcow:
+  rmilter:
     image: mailcow/rmilter
     depends_on:
-      - bind9-mailcow
+      - bind9
     #volumes:
     #  - ./data/conf/rmilter/:/etc/rmilter.conf.d/:ro
     restart: always
@@ -151,10 +151,10 @@ services:
         aliases:
           - rmilter
 
-  dovecot-mailcow:
+  dovecot:
     image: mailcow/dovecot
     depends_on:
-      - bind9-mailcow
+      - bind9
     volumes:
       #- ./data/conf/dovecot:/usr/local/etc/dovecot
       #- ./data/assets/ssl:/etc/ssl/mail/:ro
@@ -181,10 +181,10 @@ services:
         aliases:
           - dovecot
 
-  postfix-mailcow:
+  postfix:
     image: mailcow/postfix
     depends_on:
-      - bind9-mailcow
+      - bind9
     volumes:
       #- ./data/conf/postfix:/opt/postfix/conf
       #- ./data/assets/ssl:/etc/ssl/mail/:ro
@@ -208,10 +208,10 @@ services:
         aliases:
           - postfix
 
-  memcached-mailcow:
+  memcached:
     image: memcached:alpine
     depends_on:
-      - bind9-mailcow
+      - bind9
     restart: always
     dns:
       - 172.22.1.254
@@ -221,13 +221,13 @@ services:
         aliases:
           - memcached
 
-  nginx-mailcow:
+  nginx:
     depends_on:
-      - sogo-mailcow
-      - php-fpm-mailcow
+      - sogo
+      - php-fpm
     image: nginx:mainline-alpine
     #healthcheck:
-    #  test: ["CMD", "ping", "php-fpm-mailcow", "-c", "10"]
+    #  test: ["CMD", "ping", "php-fpm", "-c", "10"]
     #  interval: 10s
     #  timeout: 30s
     #  retries: 5

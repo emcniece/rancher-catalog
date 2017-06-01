@@ -115,29 +115,29 @@
       description: "Set driver, if needed. Eg. 'rancher-nfs'"
       type: "string"
 
-bind9-mailcow:
+bind9:
   scale: 1
-mysql-mailcow:
+mysql:
   scale: 1
-redis-mailcow:
+redis:
   scale: 1
-clamd-mailcow:
+clamd:
   scale: 1
-rspamd-mailcow:
+rspamd:
   scale: 1
-php-fpm-mailcow:
+php-fpm:
   scale: 1
-sogo-mailcow:
+sogo:
   scale: 1
-rmilter-mailcow:
+rmilter:
   scale: 1
-dovecot-mailcow:
+dovecot:
   scale: 1
-postfix-mailcow:
+postfix:
   scale: 1
-memcached-mailcow:
+memcached:
   scale: 1
-nginx-mailcow:
+nginx:
   scale: 1
 ipv6nat:
   scale: 1
