@@ -6,8 +6,7 @@ services:
     image: resystit/bind9
     command: "named -c /etc/bind/named.conf -g -u named"
     depends_on:
-      mysql-mailcow:
-        condition: service_healthy
+      - mysql-mailcow
     #volumes:
     #  - ./data/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
@@ -75,8 +74,7 @@ services:
       /usr/bin/rspamd -f -u _rspamd -g _rspamd
       "
     depends_on:
-      nginx-mailcow:
-        condition: service_healthy
+      - nginx-mailcow
     volumes:
       #- ./data/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
       #- ./data/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
