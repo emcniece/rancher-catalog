@@ -79,11 +79,11 @@
     - variable: HTTP_PORT
       label: HTTP Port
       type: "int"
-      default: 80
+      default: 8080
     - variable: HTTPS_PORT
       label: HTTPS Port
       type: "int"
-      default: 443
+      default: 8081
     - variable: HTTP_BIND
       label: HTTP Bind
       type: "string"
@@ -110,10 +110,16 @@
         - "http"
         - "https"
 
+    - variable: DATA_DIR
+      label: Config Data Directory
+      description: "Local directory for the /data/ from the repo. Can't be in NFS or a storage driver. No trailing slash."
+      type: "string"
+      default: "/home/rancher/mailcow-dockerized/data"
     - variable: STORAGE_DRIVER
       label: Storage Driver
       description: "Set driver, if needed. Eg. 'rancher-nfs'"
       type: "string"
+      default: "rancher-nfs"
 
 bind9:
   scale: 1

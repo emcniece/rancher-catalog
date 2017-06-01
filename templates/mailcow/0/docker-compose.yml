@@ -7,8 +7,8 @@ services:
     command: "named -c /etc/bind/named.conf -g -u named"
     depends_on:
       - mysql
-    #volumes:
-    #  - ./data/conf/bind9/named.conf:/etc/bind/named.conf
+    volumes:
+      - ${DATA_DIR}/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
     networks:
       mailcow-network:
@@ -25,7 +25,7 @@ services:
     #  retries: 5
     volumes:
       - mysql-vol-1:/var/lib/mysql/
-    #  - ./data/conf/mysql/:/etc/mysql/conf.d/:ro
+      - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
@@ -76,9 +76,9 @@ services:
     depends_on:
       - nginx
     volumes:
-      #- ./data/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
-      #- ./data/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
-      #- ./data/conf/rspamd/lua/:/etc/rspamd/lua/:ro
+      - ${DATA_DIR}/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
+      - ${DATA_DIR}/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
+      - ${DATA_DIR}/conf/rspamd/lua/:/etc/rspamd/lua/:ro
       - dkim-vol-1:/data/dkim
       - rspamd-vol-1:/var/lib/rspamd
     restart: always
@@ -98,8 +98,8 @@ services:
       - bind9
       - redis
     volumes:
-      #- ./data/web:/web:ro
-      #- ./data/conf/rspamd/dynmaps:/dynmaps:ro
+      - ${DATA_DIR}/web:/web:ro
+      - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
       - dkim-vol-1:/data/dkim
     dns:
       - 172.22.1.254
@@ -127,8 +127,8 @@ services:
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
-    #volumes:
-    #  - ./data/conf/sogo/:/etc/sogo/
+    volumes:
+      - ${DATA_DIR}/conf/sogo/:/etc/sogo/
     restart: always
     networks:
       mailcow-network:
@@ -140,8 +140,8 @@ services:
     image: mailcow/rmilter
     depends_on:
       - bind9
-    #volumes:
-    #  - ./data/conf/rmilter/:/etc/rmilter.conf.d/:ro
+    volumes:
+      - ${DATA_DIR}/conf/rmilter/:/etc/rmilter.conf.d/:ro
     restart: always
     dns:
       - 172.22.1.254
@@ -156,9 +156,9 @@ services:
     depends_on:
       - bind9
     volumes:
-      #- ./data/conf/dovecot:/usr/local/etc/dovecot
-      #- ./data/assets/ssl:/etc/ssl/mail/:ro
-      #- ./data/conf/sogo/:/etc/sogo/
+      - ${DATA_DIR}/conf/dovecot:/usr/local/etc/dovecot
+      - ${DATA_DIR}/assets/ssl:/etc/ssl/mail/:ro
+      - ${DATA_DIR}/conf/sogo/:/etc/sogo/
       - vmail-vol-1:/var/vmail
       - crypt-vol-1:/mail_crypt/
     environment:
@@ -186,8 +186,8 @@ services:
     depends_on:
       - bind9
     volumes:
-      #- ./data/conf/postfix:/opt/postfix/conf
-      #- ./data/assets/ssl:/etc/ssl/mail/:ro
+      - ${DATA_DIR}/conf/postfix:/opt/postfix/conf
+      - ${DATA_DIR}/assets/ssl:/etc/ssl/mail/:ro
       - postfix-vol-1:/var/spool/postfix
       - crypt-vol-1:/var/lib/zeyple
     environment:
@@ -239,11 +239,11 @@ services:
       - HTTPS_PORT=${HTTPS_PORT}
       - HTTP_PORT=${HTTP_PORT}
       - MAILCOW_HOSTNAME=${MAILCOW_HOSTNAME}
-    #volumes:
-    #  - ./data/web:/web:ro
-    #  - ./data/conf/rspamd/dynmaps:/dynmaps:ro
-    #  - ./data/assets/ssl/:/etc/ssl/mail/:ro
-    #  - ./data/conf/nginx/:/etc/nginx/conf.d/:rw
+    volumes:
+      - ${DATA_DIR}/web:/web:ro
+      - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
+      - ${DATA_DIR}/assets/ssl/:/etc/ssl/mail/:ro
+      - ${DATA_DIR}/conf/nginx/:/etc/nginx/conf.d/:rw
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
@@ -266,9 +266,9 @@ services:
     restart: always
     privileged: true
     network_mode: "host"
-    #volumes:
-    #  - /var/run/docker.sock:/var/run/docker.sock:ro
-    #  - /lib/modules:/lib/modules:ro
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /lib/modules:/lib/modules:ro
 
 networks:
   mailcow-network:
