@@ -1,4 +1,5 @@
-version: '2.1'
+version: '2'
+#version: '2.1'
 
 services:
   bind9-mailcow:
@@ -7,8 +8,8 @@ services:
     depends_on:
       mysql-mailcow:
         condition: service_healthy
-    volumes:
-      - ./data/conf/bind9/named.conf:/etc/bind/named.conf
+    #volumes:
+    #  - ./data/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
     networks:
       mailcow-network:
@@ -25,7 +26,7 @@ services:
       retries: 5
     volumes:
       - mysql-vol-1:/var/lib/mysql/
-      - ./data/conf/mysql/:/etc/mysql/conf.d/:ro
+    #  - ./data/conf/mysql/:/etc/mysql/conf.d/:ro
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
@@ -77,9 +78,9 @@ services:
       nginx-mailcow:
         condition: service_healthy
     volumes:
-      - ./data/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
-      - ./data/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
-      - ./data/conf/rspamd/lua/:/etc/rspamd/lua/:ro
+      #- ./data/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
+      #- ./data/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
+      #- ./data/conf/rspamd/lua/:/etc/rspamd/lua/:ro
       - dkim-vol-1:/data/dkim
       - rspamd-vol-1:/var/lib/rspamd
     restart: always
@@ -99,8 +100,8 @@ services:
       - bind9-mailcow
       - redis-mailcow
     volumes:
-      - ./data/web:/web:ro
-      - ./data/conf/rspamd/dynmaps:/dynmaps:ro
+      #- ./data/web:/web:ro
+      #- ./data/conf/rspamd/dynmaps:/dynmaps:ro
       - dkim-vol-1:/data/dkim
     dns:
       - 172.22.1.254
@@ -128,8 +129,8 @@ services:
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
-    volumes:
-      - ./data/conf/sogo/:/etc/sogo/
+    #volumes:
+    #  - ./data/conf/sogo/:/etc/sogo/
     restart: always
     networks:
       mailcow-network:
@@ -141,8 +142,8 @@ services:
     image: mailcow/rmilter
     depends_on:
       - bind9-mailcow
-    volumes:
-      - ./data/conf/rmilter/:/etc/rmilter.conf.d/:ro
+    #volumes:
+    #  - ./data/conf/rmilter/:/etc/rmilter.conf.d/:ro
     restart: always
     dns:
       - 172.22.1.254
@@ -157,9 +158,9 @@ services:
     depends_on:
       - bind9-mailcow
     volumes:
-      - ./data/conf/dovecot:/usr/local/etc/dovecot
-      - ./data/assets/ssl:/etc/ssl/mail/:ro
-      - ./data/conf/sogo/:/etc/sogo/
+      #- ./data/conf/dovecot:/usr/local/etc/dovecot
+      #- ./data/assets/ssl:/etc/ssl/mail/:ro
+      #- ./data/conf/sogo/:/etc/sogo/
       - vmail-vol-1:/var/vmail
       - crypt-vol-1:/mail_crypt/
     environment:
@@ -187,8 +188,8 @@ services:
     depends_on:
       - bind9-mailcow
     volumes:
-      - ./data/conf/postfix:/opt/postfix/conf
-      - ./data/assets/ssl:/etc/ssl/mail/:ro
+      #- ./data/conf/postfix:/opt/postfix/conf
+      #- ./data/assets/ssl:/etc/ssl/mail/:ro
       - postfix-vol-1:/var/spool/postfix
       - crypt-vol-1:/var/lib/zeyple
     environment:
@@ -240,11 +241,11 @@ services:
       - HTTPS_PORT=${HTTPS_PORT:-443}
       - HTTP_PORT=${HTTP_PORT:-80}
       - MAILCOW_HOSTNAME=${MAILCOW_HOSTNAME}
-    volumes:
-      - ./data/web:/web:ro
-      - ./data/conf/rspamd/dynmaps:/dynmaps:ro
-      - ./data/assets/ssl/:/etc/ssl/mail/:ro
-      - ./data/conf/nginx/:/etc/nginx/conf.d/:rw
+    #volumes:
+    #  - ./data/web:/web:ro
+    #  - ./data/conf/rspamd/dynmaps:/dynmaps:ro
+    #  - ./data/assets/ssl/:/etc/ssl/mail/:ro
+    #  - ./data/conf/nginx/:/etc/nginx/conf.d/:rw
     dns:
       - 172.22.1.254
     dns_search: mailcow-network
@@ -267,9 +268,9 @@ services:
     restart: always
     privileged: true
     network_mode: "host"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /lib/modules:/lib/modules:ro
+    #volumes:
+    #  - /var/run/docker.sock:/var/run/docker.sock:ro
+    #  - /lib/modules:/lib/modules:ro
 
 networks:
   mailcow-network:
@@ -283,9 +284,16 @@ networks:
 
 volumes:
   vmail-vol-1:
+    driver: ${STORAGE_DRIVER}
   mysql-vol-1:
+    driver: ${STORAGE_DRIVER}
   dkim-vol-1:
+    driver: ${STORAGE_DRIVER}
   redis-vol-1:
+    driver: ${STORAGE_DRIVER}
   rspamd-vol-1:
+    driver: ${STORAGE_DRIVER}
   postfix-vol-1:
+    driver: ${STORAGE_DRIVER}
   crypt-vol-1:
+    driver: ${STORAGE_DRIVER}

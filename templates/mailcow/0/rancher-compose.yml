@@ -109,5 +109,35 @@
       options:
         - "http"
         - "https"
-netdata:
+
+    - variable: STORAGE_DRIVER
+      label: Storage Driver
+      description: "Set driver, if needed. Eg. 'rancher-nfs'"
+      type: "string"
+
+bind9-mailcow:
+  scale: 1
+mysql-mailcow:
+  scale: 1
+redis-mailcow:
+  scale: 1
+clamd-mailcow:
+  scale: 1
+rspamd-mailcow:
+  scale: 1
+php-fpm-mailcow:
+  scale: 1
+sogo-mailcow:
+  scale: 1
+rmilter-mailcow:
+  scale: 1
+dovecot-mailcow:
+  scale: 1
+postfix-mailcow:
+  scale: 1
+memcached-mailcow:
+  scale: 1
+nginx-mailcow:
+  scale: 1
+ipv6nat:
   scale: 1
