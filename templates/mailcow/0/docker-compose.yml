@@ -153,6 +153,7 @@ services:
 
   dovecot:
     image: mailcow/dovecot
+    privileged: true
     depends_on:
       - bind9
     volumes:
@@ -183,6 +184,7 @@ services:
 
   postfix:
     image: mailcow/postfix
+    privileged: true
     depends_on:
       - bind9
     volumes:
@@ -225,6 +227,8 @@ services:
     depends_on:
       - sogo
       - php-fpm
+    links:
+      - php-fpm:phpfpm
     image: nginx:mainline-alpine
     #healthcheck:
     #  test: ["CMD", "ping", "php-fpm", "-c", "10"]
