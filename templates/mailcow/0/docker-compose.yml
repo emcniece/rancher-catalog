@@ -67,6 +67,7 @@ services:
       /usr/bin/rspamd -f -u _rspamd -g _rspamd
       "
     depends_on: [nginx]
+    links: [redis]
     volumes:
       - ${DATA_DIR}/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
       - ${DATA_DIR}/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
@@ -218,12 +219,12 @@ services:
     #      - memcached
 
   nginx:
+    image: nginx:mainline-alpine
     depends_on:
       - sogo
       - php-fpm
     links:
       - php-fpm:phpfpm
-    image: nginx:mainline-alpine
     command: /bin/sh -c "envsubst < /etc/nginx/conf.d/templates/listen_plain.template > /etc/nginx/conf.d/listen_plain.active &&
       envsubst < /etc/nginx/conf.d/templates/listen_ssl.template > /etc/nginx/conf.d/listen_ssl.active &&
       envsubst < /etc/nginx/conf.d/templates/server_name.template > /etc/nginx/conf.d/server_name.active &&
@@ -276,8 +277,8 @@ services:
 volumes:
   vmail-vol-1:
     driver: ${STORAGE_DRIVER}
-  mysql-vol-1:
-    driver: ${STORAGE_DRIVER}
+#  mysql-vol-1:
+#    driver: ${STORAGE_DRIVER}
   dkim-vol-1:
     driver: ${STORAGE_DRIVER}
   redis-vol-1:
