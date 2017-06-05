@@ -17,11 +17,6 @@ services:
 
   mysql:
     image: mysql:5.7
-    #healthcheck:
-    #  test: ["CMD", "mysqladmin", "ping", "--host", "localhost", "--silent"]
-    #  interval: 10s
-    #  timeout: 30s
-    #  retries: 5
     volumes:
       - mysql-vol-1:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
@@ -229,11 +224,6 @@ services:
     links:
       - php-fpm:phpfpm
     image: nginx:mainline-alpine
-    #healthcheck:
-    #  test: ["CMD", "ping", "php-fpm", "-c", "10"]
-    #  interval: 10s
-    #  timeout: 30s
-    #  retries: 5
     command: /bin/sh -c "envsubst < /etc/nginx/conf.d/templates/listen_plain.template > /etc/nginx/conf.d/listen_plain.active &&
       envsubst < /etc/nginx/conf.d/templates/listen_ssl.template > /etc/nginx/conf.d/listen_ssl.active &&
       envsubst < /etc/nginx/conf.d/templates/server_name.template > /etc/nginx/conf.d/server_name.active &&
