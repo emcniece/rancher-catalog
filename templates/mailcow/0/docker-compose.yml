@@ -9,11 +9,11 @@ services:
     volumes:
       - ${DATA_DIR}/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
-    networks:
-      mailcow-network:
-        ipv4_address: 172.22.1.254
-        aliases:
-          - bind9
+    #networks:
+    #  mailcow-network:
+    #    ipv4_address: 172.22.1.254
+    #    aliases:
+    #      - bind9
 
   mysql:
     image: mysql:5.7
@@ -25,19 +25,19 @@ services:
     volumes:
       - mysql-vol-1:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     environment:
       - MYSQL_ROOT_PASSWORD=${DBROOT}
       - MYSQL_DATABASE=${DBNAME}
       - MYSQL_USER=${DBUSER}
       - MYSQL_PASSWORD=${DBPASS}
     restart: always
-    networks:
-      mailcow-network:
-        aliases:
-          - mysql
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - mysql
 
   redis:
     image: redis:alpine
@@ -45,24 +45,24 @@ services:
     volumes:
       - redis-vol-1:/data/
     restart: always
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        aliases:
-          - redis
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - redis
 
   clamd:
     image: mailcow/clamd
     restart: always
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        aliases:
-          - clamd
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - clamd
 
   rspamd:
     image: mailcow/rspamd
@@ -79,14 +79,14 @@ services:
       - dkim-vol-1:/data/dkim
       - rspamd-vol-1:/var/lib/rspamd
     restart: always
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        ipv4_address: 172.22.1.253
-        aliases:
-          - rspamd
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    ipv4_address: 172.22.1.253
+    #    aliases:
+    #      - rspamd
 
   php-fpm:
     image: mailcow/phpfpm
@@ -101,19 +101,19 @@ services:
       - ${DATA_DIR}/web:/web:ro
       - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
       - dkim-vol-1:/data/dkim
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     environment:
       - DBNAME=${DBNAME}
       - DBUSER=${DBUSER}
       - DBPASS=${DBPASS}
       - MAILCOW_HOSTNAME=${MAILCOW_HOSTNAME}
     restart: always
-    networks:
-      mailcow-network:
-        aliases:
-          - phpfpm
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - phpfpm
 
   sogo:
     image: mailcow/sogo
@@ -125,17 +125,17 @@ services:
       - DBUSER=${DBUSER}
       - DBPASS=${DBPASS}
       - TZ=${TZ}
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     volumes:
       - ${DATA_DIR}/conf/sogo/:/etc/sogo/
     restart: always
-    networks:
-      mailcow-network:
-        ipv4_address: 172.22.1.252
-        aliases:
-          - sogo
+    #networks:
+    #  mailcow-network:
+    #    ipv4_address: 172.22.1.252
+    #    aliases:
+    #      - sogo
 
   rmilter:
     image: mailcow/rmilter
@@ -143,13 +143,13 @@ services:
     volumes:
       - ${DATA_DIR}/conf/rmilter/:/etc/rmilter.conf.d/:ro
     restart: always
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        aliases:
-          - rmilter
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - rmilter
 
   dovecot:
     image: mailcow/dovecot
@@ -172,15 +172,15 @@ services:
       - "${POP_PORT}:110"
       - "${POPS_PORT}:995"
       - "${SIEVE_PORT}:4190"
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     restart: always
     hostname: ${MAILCOW_HOSTNAME}
-    networks:
-      mailcow-network:
-        aliases:
-          - dovecot
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - dovecot
 
   postfix:
     image: mailcow/postfix
@@ -202,25 +202,25 @@ services:
       - "${SUBMISSION_PORT}:587"
     restart: always
     hostname: ${MAILCOW_HOSTNAME}
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        aliases:
-          - postfix
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - postfix
 
   memcached:
     image: memcached:alpine
     depends_on: [bind9]
     restart: always
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
-    networks:
-      mailcow-network:
-        aliases:
-          - memcached
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
+    #networks:
+    #  mailcow-network:
+    #    aliases:
+    #      - memcached
 
   nginx:
     depends_on:
@@ -247,18 +247,18 @@ services:
       - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
       - ${DATA_DIR}/assets/ssl/:/etc/ssl/mail/:ro
       - ${DATA_DIR}/conf/nginx/:/etc/nginx/conf.d/:rw
-    dns:
-      - 172.22.1.254
-    dns_search: mailcow-network
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     ports:
       - "${HTTPS_BIND}:${HTTPS_PORT}:${HTTPS_PORT}"
       - "${HTTP_BIND}:${HTTP_PORT}:${HTTP_PORT}"
     restart: always
-    networks:
-      mailcow-network:
-        ipv4_address: 172.22.1.251
-        aliases:
-          - nginx
+    #networks:
+    #  mailcow-network:
+    #    ipv4_address: 172.22.1.251
+    #    aliases:
+    #      - nginx
     labels:
       rgon.domain: ${MAILCOW_HOSTNAME}
       rgon.ssl: ${RGON_SSL}
@@ -273,15 +273,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /lib/modules:/lib/modules:ro
 
-networks:
-  mailcow-network:
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.22.1.0/24
-        - subnet: fd4d:6169:6c63:6f77::/64
+#networks:
+#  mailcow-network:
+#    driver: bridge
+#    enable_ipv6: true
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.22.1.0/24
+#        - subnet: fd4d:6169:6c63:6f77::/64
 
 volumes:
   vmail-vol-1:
