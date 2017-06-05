@@ -5,8 +5,7 @@ services:
   bind9:
     image: resystit/bind9
     command: "named -c /etc/bind/named.conf -g -u named"
-    depends_on:
-      - mysql
+    depends_on: [mysql]
     volumes:
       - ${DATA_DIR}/conf/bind9/named.conf:/etc/bind/named.conf
     restart: always
@@ -42,8 +41,7 @@ services:
 
   redis:
     image: redis:alpine
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     volumes:
       - redis-vol-1:/data/
     restart: always
@@ -73,8 +71,7 @@ services:
       sleep 5;
       /usr/bin/rspamd -f -u _rspamd -g _rspamd
       "
-    depends_on:
-      - nginx
+    depends_on: [nginx]
     volumes:
       - ${DATA_DIR}/conf/rspamd/override.d/:/etc/rspamd/override.d:ro
       - ${DATA_DIR}/conf/rspamd/local.d/:/etc/rspamd/local.d:ro
@@ -120,8 +117,7 @@ services:
 
   sogo:
     image: mailcow/sogo
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     links:
       - redis:redis-mailcow
     environment:
@@ -143,8 +139,7 @@ services:
 
   rmilter:
     image: mailcow/rmilter
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     volumes:
       - ${DATA_DIR}/conf/rmilter/:/etc/rmilter.conf.d/:ro
     restart: always
@@ -158,8 +153,7 @@ services:
 
   dovecot:
     image: mailcow/dovecot
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     links:
       - redis:redis-mailcow
     volumes:
@@ -190,8 +184,7 @@ services:
 
   postfix:
     image: mailcow/postfix
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     links:
       - redis:redis-mailcow
     volumes:
@@ -219,8 +212,7 @@ services:
 
   memcached:
     image: memcached:alpine
-    depends_on:
-      - bind9
+    depends_on: [bind9]
     restart: always
     dns:
       - 172.22.1.254
