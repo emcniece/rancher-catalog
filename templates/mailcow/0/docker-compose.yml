@@ -20,15 +20,15 @@ services:
     volumes:
       - mysql-vol-1:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
-    #dns:
-    #  - 172.22.1.254
-    #dns_search: mailcow-network
     environment:
       - MYSQL_ROOT_PASSWORD=${DBROOT}
       - MYSQL_DATABASE=${DBNAME}
       - MYSQL_USER=${DBUSER}
       - MYSQL_PASSWORD=${DBPASS}
     restart: always
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     #networks:
     #  mailcow-network:
     #    aliases:
@@ -96,15 +96,15 @@ services:
       - ${DATA_DIR}/web:/web:ro
       - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
       - dkim-vol-1:/data/dkim
-    #dns:
-    #  - 172.22.1.254
-    #dns_search: mailcow-network
     environment:
       - DBNAME=${DBNAME}
       - DBUSER=${DBUSER}
       - DBPASS=${DBPASS}
       - MAILCOW_HOSTNAME=${MAILCOW_HOSTNAME}
     restart: always
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     #networks:
     #  mailcow-network:
     #    aliases:
@@ -120,12 +120,12 @@ services:
       - DBUSER=${DBUSER}
       - DBPASS=${DBPASS}
       - TZ=${TZ}
-    #dns:
-    #  - 172.22.1.254
-    #dns_search: mailcow-network
     volumes:
       - ${DATA_DIR}/conf/sogo/:/etc/sogo/
     restart: always
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     #networks:
     #  mailcow-network:
     #    ipv4_address: 172.22.1.252
@@ -167,11 +167,11 @@ services:
       - "${POP_PORT}:110"
       - "${POPS_PORT}:995"
       - "${SIEVE_PORT}:4190"
+    restart: always
+    hostname: ${MAILCOW_HOSTNAME}
     #dns:
     #  - 172.22.1.254
     #dns_search: mailcow-network
-    restart: always
-    hostname: ${MAILCOW_HOSTNAME}
     #networks:
     #  mailcow-network:
     #    aliases:
@@ -237,15 +237,13 @@ services:
       - ${DATA_DIR}/conf/rspamd/dynmaps:/dynmaps:ro
       - ${DATA_DIR}/assets/ssl/:/etc/ssl/mail/:ro
       - ${DATA_DIR}/conf/nginx/:/etc/nginx/conf.d/:rw
-    #dns:
-    #  - 172.22.1.254
-    #dns_search: mailcow-network
     ports:
       - ${HTTPS_PORT}:443
       - ${HTTP_PORT}:80
-      #- "${HTTPS_BIND}:${HTTPS_PORT}:${HTTPS_PORT}"
-      #- "${HTTP_BIND}:${HTTP_PORT}:${HTTP_PORT}"
     restart: always
+    #dns:
+    #  - 172.22.1.254
+    #dns_search: mailcow-network
     #networks:
     #  mailcow-network:
     #    ipv4_address: 172.22.1.251
@@ -256,14 +254,14 @@ services:
       rgon.ssl: ${RGON_SSL}
       rgon.redirect: '${RGON_REDIRECT}'
 
-  ipv6nat:
-    image: robbertkl/ipv6nat
-    restart: always
-    privileged: true
-    network_mode: "host"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /lib/modules:/lib/modules:ro
+  #ipv6nat:
+  #  image: robbertkl/ipv6nat
+  #  restart: always
+  #  privileged: true
+  #  network_mode: "host"
+  #  volumes:
+  #    - /var/run/docker.sock:/var/run/docker.sock:ro
+  #    - /lib/modules:/lib/modules:ro
 
 #networks:
 #  mailcow-network:

@@ -84,16 +84,6 @@
       label: HTTPS Port
       type: "int"
       default: 8081
-    - variable: HTTP_BIND
-      label: HTTP Bind
-      type: "string"
-      required: true
-      default: "0.0.0.0"
-    - variable: HTTPS_BIND
-      label: HTTPS Bind
-      type: "string"
-      required: true
-      default: "0.0.0.0"
 
     - variable: RGON_SSL
       label: "RGON Proxy Enable SSL"
