@@ -18,7 +18,7 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      - mysql-vol-1:/var/lib/mysql/
+      - ${MYSQL_DATADIR}:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
     environment:
       - MYSQL_ROOT_PASSWORD=${DBROOT}

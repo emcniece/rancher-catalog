@@ -15,6 +15,12 @@
       default: "America/Vancouver"
       description: "Format: Europe/Berlin"
 
+    - variable: MYSQL_DATADIR
+      label: MySQL Storage Location
+      required: true
+      type: "string"
+      default: "mysql-vol-1"
+      description: "Use 'mysql-vol-1' for volume driver (slow), or custom dir for local machine (fast)"
     - variable: DBROOT
       label: DB Root Password
       required: true
