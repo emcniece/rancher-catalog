@@ -194,7 +194,6 @@ services:
       - bind9
     links:
       - redis:redis-mailcow
-    links:
     volumes:
       - ${DATA_DIR}/conf/postfix:/opt/postfix/conf
       - ${DATA_DIR}/assets/ssl:/etc/ssl/mail/:ro
