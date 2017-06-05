@@ -93,6 +93,9 @@ services:
 
   php-fpm:
     image: mailcow/phpfpm
+    links:
+      - redis:redis-mailcow
+      - mysql:mysql-mailcow
     command: "php-fpm -d date.timezone=${TZ}"
     depends_on:
       - bind9
@@ -119,6 +122,8 @@ services:
     image: mailcow/sogo
     depends_on:
       - bind9
+    links:
+      - redis:redis-mailcow
     environment:
       - DBNAME=${DBNAME}
       - DBUSER=${DBUSER}
@@ -153,9 +158,10 @@ services:
 
   dovecot:
     image: mailcow/dovecot
-    privileged: true
     depends_on:
       - bind9
+    links:
+      - redis:redis-mailcow
     volumes:
       - ${DATA_DIR}/conf/dovecot:/usr/local/etc/dovecot
       - ${DATA_DIR}/assets/ssl:/etc/ssl/mail/:ro
@@ -184,9 +190,11 @@ services:
 
   postfix:
     image: mailcow/postfix
-    privileged: true
     depends_on:
       - bind9
+    links:
+      - redis:redis-mailcow
+    links:
     volumes:
       - ${DATA_DIR}/conf/postfix:/opt/postfix/conf
       - ${DATA_DIR}/assets/ssl:/etc/ssl/mail/:ro
