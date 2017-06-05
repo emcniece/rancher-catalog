@@ -15,11 +15,17 @@
       default: "America/Vancouver"
       description: "Format: Europe/Berlin"
 
+    - variable: DATA_DIR
+      label: Config Data Directory
+      description: "Local directory for the /data/ from the repo. Can't be in NFS or a storage driver. No trailing slash."
+      type: "string"
+      default: "/home/rancher/mailcow-dockerized/data"
+
     - variable: MYSQL_DATADIR
       label: MySQL Storage Location
       required: true
       type: "string"
-      default: "mysql-vol-1"
+      default: "/home/rancher/mailcow-dockerized/data/mysql-data"
       description: "Use 'mysql-vol-1' for volume driver (slow), or custom dir for local machine (fast)"
     - variable: DBROOT
       label: DB Root Password
@@ -106,11 +112,6 @@
         - "http"
         - "https"
 
-    - variable: DATA_DIR
-      label: Config Data Directory
-      description: "Local directory for the /data/ from the repo. Can't be in NFS or a storage driver. No trailing slash."
-      type: "string"
-      default: "/home/rancher/mailcow-dockerized/data"
     - variable: STORAGE_DRIVER
       label: Storage Driver
       description: "Set driver, if needed. Eg. 'rancher-nfs'"

@@ -276,8 +276,8 @@ services:
 volumes:
   vmail-vol-1:
     driver: ${STORAGE_DRIVER}
-  mysql-vol-1:
-    driver: ${STORAGE_DRIVER}
+#  mysql-vol-1:
+#    driver: ${STORAGE_DRIVER}
   dkim-vol-1:
     driver: ${STORAGE_DRIVER}
   redis-vol-1:
