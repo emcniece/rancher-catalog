@@ -16,7 +16,7 @@ services:
     #      - bind9
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     volumes:
       - ${MYSQL_DATADIR}:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
