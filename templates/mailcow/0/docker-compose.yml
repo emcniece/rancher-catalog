@@ -17,7 +17,7 @@ services:
           - bind9
 
   mysql:
-    image: mariadb:10.1
+    image: mysql:5.7
     #healthcheck:
     #  test: ["CMD", "mysqladmin", "ping", "--host", "localhost", "--silent"]
     #  interval: 10s
