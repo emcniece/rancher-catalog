@@ -16,7 +16,7 @@ services:
     #      - bind9
 
   mysql:
-    image: mariadb:10.3
+    image: mariadb:10.1
     volumes:
       - ${MYSQL_DATADIR}:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
