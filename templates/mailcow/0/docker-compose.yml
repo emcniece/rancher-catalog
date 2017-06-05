@@ -16,7 +16,7 @@ services:
     #      - bind9
 
   mysql:
-    image: mysql:8.0
+    image: mariadb:10.3
     volumes:
       - ${MYSQL_DATADIR}:/var/lib/mysql/
       - ${DATA_DIR}/conf/mysql/:/etc/mysql/conf.d/:ro
@@ -276,8 +276,8 @@ services:
 volumes:
   vmail-vol-1:
     driver: ${STORAGE_DRIVER}
-#  mysql-vol-1:
-#    driver: ${STORAGE_DRIVER}
+  mysql-vol-1:
+    driver: ${STORAGE_DRIVER}
   dkim-vol-1:
     driver: ${STORAGE_DRIVER}
   redis-vol-1:
