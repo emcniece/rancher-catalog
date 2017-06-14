@@ -2,33 +2,49 @@ version: '2'
 
 services:
 
-  wordpress:
-    tty: true
-    stdin_open: true
-    image: emcniece/wp-php7-nginx:0.0.12
-    volumes:
-      - ${DIR}/wordpress:/var/www/wordpress
+  nginx:
+    image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
       - ${PORT}:80
-    links: [mysql]
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_DATABASE: ${MYSQL_NAME}
-      MYSQL_PASSWORD: ${MYSQL_PASS}
-      SSL_ENABLED: ${SSL}
+    #links:
+    #  - wp-fpm
+    volumes:
+      - wproot:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
       rgon.redirect: ${REDIRECT}
 
+  wordpress:
+    tty: true
+    stdin_open: true
+    image: emcniece/wordpress:4-php7.1-fpm-alpine
+    volumes:
+      - wproot:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_NAME: ${MYSQL_NAME}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASS}
+      WPFPM_WP_REDIS_HOST: redis
+      WPFPM_RT_WP_NGINX_HELPER_CACHE_PATH: "/tmp/cache"
+
   mysql:
     image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
     volumes:
-      - ${DIR}/mariadb:/var/lib/mysql:rw
+      - mysql:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_NAME}
       MYSQL_PASSWORD: ${MYSQL_PASS}
+
+  redis:
+    image: redis:3-alpine
+
+volumes:
+  wproot:
+    driver: ${STORAGE_DRIVER}
+  mysql:
+    driver: ${STORAGE_DRIVER}

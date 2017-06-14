@@ -1,16 +1,16 @@
 .catalog:
   name: WordPress PHP7 MySQL
-  version: 0.0.2
+  version: 0.0.3
   description: |
     One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: wp-php7-mysql-0
   questions:
-    - variable: "DIR"
-      label: "Storage directory"
-      description: "Path of shared storage to use for WordPress and the import files. No trailing slash!"
-      required: true
-      type: "string"
+    #- variable: "DIR"
+    #  label: "Storage directory"
+    #  description: "Path of shared storage to use for WordPress and the import files. No trailing slash!"
+    #  required: true
+    #  type: "string"
     - variable: "PORT"
       description: |
         Port for HTTP traffic. Leave blank to let Rancher choose a random port.
@@ -63,3 +63,18 @@
       options:
         - http
         - https
+
+    - variable: STORAGE_DRIVER
+      label: Storage Driver
+      description: "Set driver, if needed. Eg. 'rancher-nfs'"
+      type: "string"
+      default: "rancher-nfs"
+
+nginx:
+  scale: 1
+wordpress:
+  scale: 1
+mysql:
+  scale: 1
+redis:
+  scale: 1
