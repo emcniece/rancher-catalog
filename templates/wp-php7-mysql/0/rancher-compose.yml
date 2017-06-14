@@ -1,4 +1,5 @@
-.catalog:
+version: '2'
+catalog:
   name: WordPress PHP7 MySQL
   version: 0.0.3
   description: |
@@ -70,11 +71,33 @@
       type: "string"
       default: "rancher-nfs"
 
-nginx:
-  scale: 1
-wordpress:
-  scale: 1
-mysql:
-  scale: 1
-redis:
-  scale: 1
+services:
+  nginx:
+    scale: 1
+    start_on_create: true
+  wordpress:
+    scale: 1
+    start_on_create: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      {{- if eq .Values.REDIRECT "https" }}
+      port: 443
+      {{- else }}
+      port: 80
+      {{- end }}
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 300000
+      strategy: none
+      request_line: GET "${REDIRECT}://${HOST}/wp-cron.php?doing_wp_cron" "HTTP/1.0"
+      reinitializing_timeout: 60000
+  bg-sync:
+    scale: 1
+    start_on_create: true
+  mysql:
+    scale: 1
+    start_on_create: true
+  redis:
+    scale: 1
+    start_on_create: true

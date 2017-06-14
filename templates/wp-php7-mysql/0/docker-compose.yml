@@ -48,8 +48,11 @@ services:
     volumes:
       - wp-local:/source/wp
       - wp-nfs:/destination/wp
-      - mysql-local:/source/mysql
-      - mysql-nfs:/destination/mysql
+
+      # DB sync is possible, but really heavy. Consider dumping
+      # db to file and syncing with WP files instead.
+      #- mysql-local:/source/mysql
+      #- mysql-nfs:/destination/mysql
     environment:
       - SYNC_VERBOSE=1
 
@@ -60,5 +63,6 @@ volumes:
     driver: ${STORAGE_DRIVER}
   mysql-local:
     driver: local
-  mysql-nfs:
-    driver: ${STORAGE_DRIVER}
+# Enable if syncing DB
+#  mysql-nfs:
+#    driver: ${STORAGE_DRIVER}
