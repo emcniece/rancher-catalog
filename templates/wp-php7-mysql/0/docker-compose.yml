@@ -51,9 +51,11 @@ services:
 
       # DB sync is possible, but really heavy. Consider dumping
       # db to file and syncing with WP files instead.
+      # IF enabling this, remove the SYNC_SOURCE variable.
       #- mysql-local:/source/mysql
       #- mysql-nfs:/destination/mysql
     environment:
+      - SYNC_SOURCE=/source/wp/wp-content
       - SYNC_VERBOSE=1
 
 volumes:
