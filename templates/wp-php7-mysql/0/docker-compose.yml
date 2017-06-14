@@ -6,7 +6,8 @@ services:
     image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
       - ${PORT}:80
-    links: [wp-fpm]
+    links:
+      - wordpress:wp-fpm
     volumes:
       - wproot:/var/www/html
     labels:
@@ -14,7 +15,7 @@ services:
       rgon.domain: ${HOST}
       rgon.redirect: ${REDIRECT}
 
-  wp-fpm:
+  wordpress:
     tty: true
     stdin_open: true
     image: emcniece/wordpress:4-php7.1-fpm-alpine
