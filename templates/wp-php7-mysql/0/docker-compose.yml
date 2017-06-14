@@ -6,8 +6,7 @@ services:
     image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
       - ${PORT}:80
-    #links:
-    #  - wordpress:wp-fpm
+    links: [wp-fpm]
     volumes:
       - wproot:/var/www/html
     labels:
