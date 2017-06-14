@@ -9,7 +9,7 @@ services:
     links:
       - wordpress:wp-fpm
     volumes:
-      - wproot:/var/www/html
+      - wplocal:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
@@ -20,7 +20,7 @@ services:
     stdin_open: true
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
-      - wproot:/var/www/html
+      - wplocal:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -43,8 +43,18 @@ services:
   redis:
     image: redis:3-alpine
 
+  bg-sync:
+    image: cweagans/bg-sync
+    volumes:
+      - wplocal:/source
+      - wpnfs:/destination
+    environment:
+      - SYNC_VERBOSE=1
+
 volumes:
-  wproot:
+  wplocal:
+    driver: local
+  wpnfs:
     driver: ${STORAGE_DRIVER}
   mysql:
     driver: ${STORAGE_DRIVER}
