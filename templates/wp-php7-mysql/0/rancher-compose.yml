@@ -61,7 +61,7 @@
 
     - variable: STORAGE_LOCAL
       label: Local Storage Driver
-      description: "Set directory if needed, or leave as "local" for a named volume"
+      description: "Set directory if needed, or leave as 'local' for a named volume"
       type: "string"
       default: "local"
     - variable: STORAGE_REMOTE
