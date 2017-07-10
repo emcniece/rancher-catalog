@@ -40,6 +40,17 @@ services:
       MYSQL_DATABASE: ${MYSQL_NAME}
       MYSQL_PASSWORD: ${MYSQL_PASS}
 
+  mysql-helper:
+    image: emcniece/mysql-helper:0.0.1
+    volumes:
+      - wp-local:/backup
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DB=${MYSQL_NAME}
+      - MYSQL_PASS=${MYSQL_PASS}
+      - INIT_RESTORE_LATEST=true
+
   redis:
     image: redis:3-alpine
 
@@ -65,6 +76,3 @@ volumes:
     driver: ${STORAGE_DRIVER}
   mysql-local:
     driver: local
-# Enable if syncing DB
-#  mysql-nfs:
-#    driver: ${STORAGE_DRIVER}
