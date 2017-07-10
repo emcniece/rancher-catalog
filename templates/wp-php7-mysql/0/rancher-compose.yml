@@ -6,11 +6,6 @@
   maintainer: "Eric McNiece <emcniece@gmail.com>"
   uuid: wp-php7-mysql-0
   questions:
-    #- variable: "DIR"
-    #  label: "Storage directory"
-    #  description: "Path of shared storage to use for WordPress and the import files. No trailing slash!"
-    #  required: true
-    #  type: "string"
     - variable: "PORT"
       description: |
         Port for HTTP traffic. Leave blank to let Rancher choose a random port.
@@ -37,7 +32,7 @@
       type: "password"
       default: "wordpress"
     - variable: "INNODB_BUF"
-      description: "Default pool size is often too large for small nodes - set to 20M if this container runs out of memory"
+      description: "Should be total size of DB + 60%"
       label: "InnoDB Buffer Pool Size (MB)"
       required: true
       type: "integer"
@@ -64,7 +59,12 @@
         - http
         - https
 
-    - variable: STORAGE_DRIVER
+    - variable: STORAGE_LOCAL
+      label: Local Storage Driver
+      description: "Set directory if needed, or leave as "local" for a named volume"
+      type: "string"
+      default: "local"
+    - variable: STORAGE_REMOTE
       label: Storage Driver
       description: "Set driver, if needed. Eg. 'rancher-nfs'"
       type: "string"
