@@ -36,7 +36,7 @@ services:
     image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
     volumes:
-      - ${STORAGE_LOCAL}:/var/lib/mysql:rw
+      - db:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
@@ -53,6 +53,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_DB=${MYSQL_NAME}
       - MYSQL_PASS=${MYSQL_PASS}
+      - SQL_GZ=true
       - INIT_RESTORE_LATEST=true
 
   bg-sync:
@@ -64,5 +65,7 @@ services:
       - SYNC_VERBOSE=1
 
 volumes:
+  db:
+    driver: ${STORAGE_DB}
   nfs:
     driver: ${STORAGE_REMOTE}
