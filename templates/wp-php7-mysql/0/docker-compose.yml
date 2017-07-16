@@ -9,7 +9,7 @@ services:
     links:
       - wordpress:wp-fpm
     volumes:
-      - local:/var/www/html
+      - ${STORAGE_LOCAL}:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
@@ -20,7 +20,7 @@ services:
     stdin_open: true
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
-      - local:/var/www/html
+      - ${STORAGE_LOCAL}:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -29,11 +29,14 @@ services:
       WPFPM_WP_REDIS_HOST: redis
       WPFPM_RT_WP_NGINX_HELPER_CACHE_PATH: "/tmp/cache"
 
+  redis:
+    image: redis:3-alpine
+
   mysql:
     image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
     volumes:
-      - local:/var/lib/mysql:rw
+      - ${STORAGE_LOCAL}:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
@@ -43,8 +46,8 @@ services:
   mysql-helper:
     image: emcniece/mysql-helper:0.0.2
     volumes:
-      - local:/target
-      - backup:/backup
+      - ${STORAGE_LOCAL}:/target
+      - ${STORAGE_BACKUP}:/backup
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=${MYSQL_USER}
@@ -52,21 +55,14 @@ services:
       - MYSQL_PASS=${MYSQL_PASS}
       - INIT_RESTORE_LATEST=true
 
-  redis:
-    image: redis:3-alpine
-
   bg-sync:
     image: cweagans/bg-sync
     volumes:
-      - backup:/source
+      - ${STORAGE_BACKUP}:/source
       - nfs:/destination
     environment:
       - SYNC_VERBOSE=1
 
 volumes:
-  local:
-    driver: ${STORAGE_LOCAL}
-  backup:
-    driver: ${STORAGE_BACKUP}
   nfs:
     driver: ${STORAGE_REMOTE}

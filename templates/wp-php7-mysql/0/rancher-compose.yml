@@ -70,7 +70,7 @@
       type: "string"
       default: "/home/rancher/mysite/backup"
     - variable: STORAGE_REMOTE
-      label: Storage Driver
+      label: Remote Storage Driver
       description: "Set dir or driver. Eg. 'rancher-nfs'"
       type: "string"
       default: "rancher-nfs"
