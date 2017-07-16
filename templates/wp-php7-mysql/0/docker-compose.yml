@@ -9,7 +9,7 @@ services:
     links:
       - wordpress:wp-fpm
     volumes:
-      - wp-local:/var/www/html
+      - local:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
@@ -20,7 +20,7 @@ services:
     stdin_open: true
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
-      - wp-local:/var/www/html
+      - local:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -33,7 +33,7 @@ services:
     image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
     volumes:
-      - mysql-local:/var/lib/mysql:rw
+      - local:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
@@ -43,7 +43,8 @@ services:
   mysql-helper:
     image: emcniece/mysql-helper:0.0.2
     volumes:
-      - wp-local:/backup
+      - local:/target
+      - backup:/backup
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=${MYSQL_USER}
@@ -57,16 +58,15 @@ services:
   bg-sync:
     image: cweagans/bg-sync
     volumes:
-      - wp-local:/source/wp
-      - wp-nfs:/destination/wp
+      - backup:/source
+      - nfs:/destination
     environment:
-      - SYNC_SOURCE=/source/wp/wp-content
       - SYNC_VERBOSE=1
 
 volumes:
-  wp-local:
+  local:
     driver: ${STORAGE_LOCAL}
-  wp-nfs:
+  backup:
+    driver: ${STORAGE_BACKUP}
+  nfs:
     driver: ${STORAGE_REMOTE}
-  mysql-local:
-    driver: ${STORAGE_LOCAL}

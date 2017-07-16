@@ -1,6 +1,6 @@
 .catalog:
   name: WordPress PHP7 MySQL
-  version: 0.0.3
+  version: 0.0.4
   description: |
     One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
   maintainer: "Eric McNiece <emcniece@gmail.com>"
@@ -61,12 +61,17 @@
 
     - variable: STORAGE_LOCAL
       label: Local Storage Driver
-      description: "Set directory if needed, or leave as 'local' for a named volume"
+      description: "Set directory if needed, or set to 'local' for a named volume"
       type: "string"
-      default: "local"
+      default: "/home/rancher/mysite/wp"
+    - variable: STORAGE_BACKUP
+      label: Backup Storage Driver
+      description: "Set directory if needed, or set to 'local' for a named volume"
+      type: "string"
+      default: "/home/rancher/mysite/backup"
     - variable: STORAGE_REMOTE
       label: Storage Driver
-      description: "Set driver, if needed. Eg. 'rancher-nfs'"
+      description: "Set dir or driver. Eg. 'rancher-nfs'"
       type: "string"
       default: "rancher-nfs"
 

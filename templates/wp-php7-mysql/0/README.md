@@ -15,3 +15,7 @@ Volumes available at specified directory:
 - `/var/www/import`
 
 Import functionality not implemented yet.
+
+## TODO
+
+- Adjust bg-sync to watch wp /var/backup dir instead of wp-content
