@@ -68,14 +68,15 @@
       label: Backup Storage Driver
       description: "Options: local directory or 'nfs'"
       type: "string"
+      default: "/home/rancher/mysite/backup"
     - variable: STORAGE_DB
       label: Database Storage Driver
-      description: "Options: 'local' (named volume) or 'nfs'"
+      description: "Options: 'local' (named volume) or 'rancher-nfs'"
       type: "string"
-      default: "db"
+      default: "local"
     - variable: STORAGE_REMOTE
       label: Remote Storage Driver
-      description: "Options: 'local' (named volume) or 'nfs'"
+      description: "Options: 'local' (named volume) or 'rancher-nfs'"
       type: "string"
       default: "rancher-nfs"
 
