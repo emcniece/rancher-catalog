@@ -12,10 +12,7 @@ Includes a MySQL container - use the other catalog item to use an remote databas
 Volumes available at specified directory:
 
 - `/var/www/wordpress`
-- `/var/www/import`
-
-Import functionality not implemented yet.
 
 ## TODO
 
-- Adjust bg-sync to watch wp /var/backup dir instead of wp-content
+- Docs for backup/restore functionality
