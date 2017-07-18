@@ -21,6 +21,7 @@ services:
     links:
       - mysql
       - redis
+      - nginx
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
       - files:/var/www/html
