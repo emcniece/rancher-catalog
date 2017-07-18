@@ -18,6 +18,9 @@ services:
   wordpress:
     tty: true
     stdin_open: true
+    links:
+      - mysql
+      - redis
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
       - ${STORAGE_LOCAL}:/var/www/html
@@ -28,6 +31,8 @@ services:
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASS}
       WPFPM_WP_REDIS_HOST: redis
       WPFPM_RT_WP_NGINX_HELPER_CACHE_PATH: "/tmp/cache"
+    labels:
+      io.rancher.sidekicks: nginx, mysql-helper, bg-sync
 
   redis:
     image: redis:3-alpine
@@ -45,6 +50,8 @@ services:
 
   mysql-helper:
     image: emcniece/mysql-helper:0.0.2
+    links:
+      - mysql
     volumes:
       - ${STORAGE_LOCAL}:/target
       - ${STORAGE_BACKUP}:/backup
