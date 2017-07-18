@@ -9,7 +9,7 @@ services:
     links:
       - wordpress:wp-fpm
     volumes:
-      - ${STORAGE_LOCAL}:/var/www/html
+      - files:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
@@ -23,7 +23,7 @@ services:
       - redis
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
-      - ${STORAGE_LOCAL}:/var/www/html
+      - files:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -53,8 +53,8 @@ services:
     links:
       - mysql
     volumes:
-      - ${STORAGE_LOCAL}:/target
-      - ${STORAGE_BACKUP}:/backup
+      - files:/target
+      - staging:/backup
     environment:
       - MYSQL_HOST=mysql
       - MYSQL_USER=${MYSQL_USER}
@@ -66,12 +66,16 @@ services:
   bg-sync:
     image: cweagans/bg-sync
     volumes:
-      - ${STORAGE_BACKUP}:/source
+      - staging:/source
       - nfs:/destination
     environment:
       - SYNC_VERBOSE=1
 
 volumes:
+  staging:
+    driver: local
+  files:
+    driver: ${STORAGE_LOCAL}
   db:
     driver: ${STORAGE_DB}
   nfs:

@@ -12,6 +12,7 @@
       label: "Port"
       required: false
       type: "int"
+      default: 45000
 
     - variable: "MYSQL_NAME"
       description: "Database Name"
@@ -61,14 +62,14 @@
 
     - variable: STORAGE_LOCAL
       label: Local Storage Driver
-      description: "Options: local directory or 'nfs'"
+      description: "Options: 'local' or 'nfs' (no host directory support)"
       type: "string"
       default: "/home/rancher/mysite/wp"
     - variable: STORAGE_BACKUP
       label: Backup Storage Driver
-      description: "Options: local directory or 'nfs'"
+      description: "Options: local directory or 'nfs' for NFS/Rancher-Managed storage"
       type: "string"
-      default: "/home/rancher/mysite/backup"
+      default: "nfs"
     - variable: STORAGE_DB
       label: Database Storage Driver
       description: "Options: 'local' (named volume) or 'rancher-nfs'"
