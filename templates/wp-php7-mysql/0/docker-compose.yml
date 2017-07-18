@@ -77,6 +77,6 @@ volumes:
   files:
     driver: ${STORAGE_LOCAL}
   db:
-    driver: ${STORAGE_DB}
+    driver: ${STORAGE_LOCAL}
   nfs:
     driver: ${STORAGE_REMOTE}
