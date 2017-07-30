@@ -8,7 +8,7 @@
   questions:
     - variable: "PORT"
       description: |
-        Port for HTTP traffic. Leave blank to let Rancher choose a random port.
+        Port for HTTP traffic
       label: "Port"
       required: false
       type: "int"

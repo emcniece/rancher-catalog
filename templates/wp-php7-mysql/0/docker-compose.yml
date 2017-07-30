@@ -5,24 +5,39 @@ services:
   nginx:
     image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
-    - ${PORT}:80
+      - ${PORT}:80
     volumes:
-    - files:/var/www/html
+      - files:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
       rgon.redirect: ${REDIRECT}
 
+  mysql-helper:
+    image: emcniece/mysql-helper:0.0.2
+    links:
+      - mysql
+    volumes:
+      - files:/target
+      - nfs:/backup
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DB=${MYSQL_NAME}
+      - MYSQL_PASS=${MYSQL_PASS}
+      - SQL_GZ=true
+      - INIT_RESTORE_LATEST=true
+
   wp-fpm:
     tty: true
     stdin_open: true
     links:
-    - mysql
-    - redis
-    - nginx
+      - mysql
+      - redis
+      - nginx
     image: emcniece/wordpress:4-php7.1-fpm-alpine
     volumes:
-    - files:/var/www/html
+      - files:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: ${MYSQL_USER}
@@ -31,7 +46,7 @@ services:
       WPFPM_WP_REDIS_HOST: redis
       WPFPM_RT_WP_NGINX_HELPER_CACHE_PATH: "/tmp/cache"
     labels:
-      io.rancher.sidekicks: nginx, mysql-helper, bg-sync
+      io.rancher.sidekicks: nginx, mysql-helper #, bg-sync
 
   redis:
     image: redis:3-alpine
@@ -39,43 +54,28 @@ services:
   mysql:
     image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
-    volumes:
-    - db:/var/lib/mysql:rw
+    #volumes:
+    #  - db:/var/lib/mysql:rw
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_NAME}
       MYSQL_PASSWORD: ${MYSQL_PASS}
 
-  mysql-helper:
-    image: emcniece/mysql-helper:0.0.2
-    links:
-    - mysql
-    volumes:
-    - files:/target
-    - staging:/backup
-    environment:
-    - MYSQL_HOST=mysql
-    - MYSQL_USER=${MYSQL_USER}
-    - MYSQL_DB=${MYSQL_NAME}
-    - MYSQL_PASS=${MYSQL_PASS}
-    - SQL_GZ=true
-    - INIT_RESTORE_LATEST=true
-
-  bg-sync:
-    image: cweagans/bg-sync
-    volumes:
-    - staging:/source
-    - nfs:/destination
-    environment:
-    - SYNC_VERBOSE=1
+#  bg-sync:
+#    image: cweagans/bg-sync
+#    volumes:
+#      - staging:/source
+#      - nfs:/destination
+#    environment:
+#      - SYNC_VERBOSE=1
 
 volumes:
-  staging:
-    driver: local
+  #staging:
+  #  driver: local
   files:
     driver: ${STORAGE_LOCAL}
-  db:
-    driver: ${STORAGE_LOCAL}
+  #db:
+  #  driver: ${STORAGE_LOCAL}
   nfs:
     driver: ${STORAGE_REMOTE}
