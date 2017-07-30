@@ -81,5 +81,3 @@ mysql-helper:
   scale: 1
 redis:
   scale: 1
-bg-sync:
-  scale: 1
