@@ -1,4 +1,5 @@
-.catalog:
+version: '2'
+catalog:
   name: WordPress PHP7 MySQL
   version: 0.0.4
   description: |
@@ -80,7 +81,7 @@
       label: Remote Storage Directory Name
       description: "Unique name of storage directory. Only used for external remote storage."
       type: "string"
-      default: "nfs"
+      default: "mysite.com"
       required: true
 
 nginx:
