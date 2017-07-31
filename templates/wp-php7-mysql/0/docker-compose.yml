@@ -19,7 +19,7 @@ services:
     - mysql:mysql
     volumes:
     - files:/target
-    - ${STORAGE_REMOTE_DIRNAME}:/backup
+    - backup/${STORAGE_REMOTE_DIRNAME}:/backup
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: ${MYSQL_USER}
@@ -64,6 +64,6 @@ services:
 volumes:
   files:
     driver: ${STORAGE_LOCAL}
-  ${STORAGE_REMOTE_DIRNAME}:
+  backup:
     driver: ${STORAGE_REMOTE}
     external: ${STORAGE_REMOTE_EXTERNAL}

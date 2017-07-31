@@ -36,8 +36,8 @@
       description: "Should be total size of DB + 60%"
       label: "InnoDB Buffer Pool Size (MB)"
       required: true
-      type: "integer"
-      default: "20"
+      type: "int"
+      default: 20
 
     - variable: "HOST"
       description: "RGON-Proxy Hostname for WordPress (FQDN)"
