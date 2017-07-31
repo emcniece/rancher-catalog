@@ -70,6 +70,18 @@
       description: "Options: 'local' (named volume) or 'rancher-nfs' for Rancher-managed storage"
       type: "string"
       default: "rancher-nfs"
+    - variable: "STORAGE_REMOTE_EXTERNAL"
+      description: "Determines storage scope. Stack=false, Environment=true"
+      label: "External Remote Storage"
+      required: true
+      type: "boolean"
+      default: false
+    - variable: STORAGE_REMOTE_DIRNAME
+      label: Remote Storage Directory Name
+      description: "Unique name of storage directory. Only used for external remote storage."
+      type: "string"
+      default: "nfs"
+      required: true
 
 nginx:
   scale: 1
