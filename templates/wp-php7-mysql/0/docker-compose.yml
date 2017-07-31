@@ -1,5 +1,4 @@
 version: '2'
-
 services:
   nginx:
     image: emcniece/nginx-cache-purge-wp:1.13-alpine
@@ -66,4 +65,4 @@ volumes:
     driver: ${STORAGE_LOCAL}
   backup:
     driver: ${STORAGE_REMOTE}
-    external: ${STORAGE_REMOTE_EXTERNAL}
+    external: '${STORAGE_REMOTE_EXTERNAL}'
