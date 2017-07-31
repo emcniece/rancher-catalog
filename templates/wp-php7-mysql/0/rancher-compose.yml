@@ -41,7 +41,7 @@ catalog:
       default: 20
 
     - variable: "HOST"
-      description: "RGON-Proxy Hostname for WordPress (FQDN)"
+      description: "RGON-Proxy Hostname for WordPress (FQDN). Also used for helper backup directory"
       label: "Hostname"
       required: false
       type: "string"
@@ -77,16 +77,10 @@ catalog:
       required: true
       type: "boolean"
       default: false
-    - variable: STORAGE_REMOTE_DIRNAME
-      label: Remote Storage Directory Name
-      description: "Unique name of storage directory. Only used for external remote storage."
-      type: "string"
-      default: "mysite.com"
-      required: true
 
 nginx:
   scale: 1
-wordpress:
+wp-fpm:
   scale: 1
 mysql:
   scale: 1

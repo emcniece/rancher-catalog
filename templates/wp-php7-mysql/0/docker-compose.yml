@@ -1,7 +1,5 @@
 version: '2'
-
 services:
-
   nginx:
     image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
@@ -14,12 +12,12 @@ services:
       rgon.redirect: ${REDIRECT}
 
   mysql-helper:
-    image: emcniece/mysql-helper:0.0.2
+    image: emcniece/mysql-helper:0.0.4
     links:
     - mysql:mysql
     volumes:
     - files:/target
-    - backup/${STORAGE_REMOTE_DIRNAME}:/backup
+    - backup:/backup
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: ${MYSQL_USER}
@@ -28,6 +26,7 @@ services:
       MYSQL_PORT: 3306
       SQL_GZ: true
       INIT_RESTORE_LATEST: true
+      BACKUP_DIR: "/backup/${HOST}"
 
   wp-fpm:
     image: emcniece/wordpress:4-php7.1-fpm-alpine
