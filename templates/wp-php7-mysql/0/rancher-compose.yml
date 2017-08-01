@@ -2,10 +2,9 @@ version: '2'
 catalog:
   name: WordPress PHP7 MySQL
   version: 0.0.4
-  description: |
-    One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
+  description: One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
   maintainer: "Eric McNiece <emcniece@gmail.com>"
-  uuid: wp-php7-mysql-0
+
   questions:
     - variable: "PORT"
       description: |
@@ -78,13 +77,14 @@ catalog:
       type: "boolean"
       default: false
 
-nginx:
-  scale: 1
-wp-fpm:
-  scale: 1
-mysql:
-  scale: 1
-mysql-helper:
-  scale: 1
-redis:
-  scale: 1
+services:
+  nginx:
+    scale: 1
+  wp-fpm:
+    scale: 1
+  mysql:
+    scale: 1
+  mysql-helper:
+    scale: 1
+  redis:
+    scale: 1
