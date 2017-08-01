@@ -65,4 +65,4 @@ volumes:
     driver: ${STORAGE_LOCAL}
   backup:
     driver: ${STORAGE_REMOTE}
-    external: ${STORAGE_REMOTE_EXTERNAL}
+    external: true
