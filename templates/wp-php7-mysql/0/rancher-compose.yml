@@ -42,7 +42,7 @@ catalog:
     - variable: "HOST"
       description: "RGON-Proxy Hostname for WordPress (FQDN). Also used for helper backup directory"
       label: "Hostname"
-      required: false
+      required: true
       type: "string"
     - variable: "SSL"
       description: "Enable RGON-Proxy SSL certificate"

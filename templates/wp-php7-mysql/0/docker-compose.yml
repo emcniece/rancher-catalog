@@ -1,7 +1,7 @@
 version: '2'
 services:
   nginx:
-    image: "emcniece/nginx-cache-purge-wp:1.13-alpine"
+    image: emcniece/nginx-cache-purge-wp:1.13-alpine
     ports:
     - ${PORT}:80
     volumes:
@@ -12,7 +12,7 @@ services:
       rgon.redirect: ${REDIRECT}
 
   mysql-helper:
-    image: "emcniece/mysql-helper:0.0.4"
+    image: emcniece/mysql-helper:0.0.4
     links:
     - mysql:mysql
     volumes:
@@ -29,7 +29,7 @@ services:
       BACKUP_DIR: "/backup/${HOST}"
 
   wp-fpm:
-    image: "emcniece/wordpress:4-php7.1-fpm-alpine"
+    image: emcniece/wordpress:4-php7.1-fpm-alpine
     tty: true
     stdin_open: true
     links:
@@ -49,10 +49,10 @@ services:
       WPFPM_RT_WP_NGINX_HELPER_CACHE_PATH: "/tmp/cache"
 
   redis:
-    image: "redis:3-alpine"
+    image: redis:3-alpine
 
   mysql:
-    image: "mariadb"
+    image: mariadb
     command: mysqld --innodb-buffer-pool-size=${INNODB_BUF}M
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
