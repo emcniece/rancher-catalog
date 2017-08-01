@@ -4,8 +4,8 @@ services:
     image: "emcniece/nginx-cache-purge-wp:1.13-alpine"
     ports:
     - ${PORT}:80
-    volumes_from:
-    - wp-fpm
+    volumes:
+    - files:/var/www/html
     labels:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
@@ -23,9 +23,9 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DB: ${MYSQL_NAME}
       MYSQL_PASS: ${MYSQL_PASS}
-      MYSQL_PORT: 3306
-      SQL_GZ: true
-      INIT_RESTORE_LATEST: true
+      MYSQL_PORT: '3306'
+      SQL_GZ: 'true'
+      INIT_RESTORE_LATEST: 'true'
       BACKUP_DIR: "/backup/${HOST}"
 
   wp-fpm:
@@ -65,4 +65,4 @@ volumes:
     driver: ${STORAGE_LOCAL}
   backup:
     driver: ${STORAGE_REMOTE}
-    external: '${STORAGE_REMOTE_EXTERNAL}'
+    external: ${STORAGE_REMOTE_EXTERNAL}
