@@ -74,8 +74,11 @@ catalog:
       description: "Determines storage scope. Stack=false, Environment=true"
       label: "External Remote Storage"
       required: true
-      type: "boolean"
-      default: false
+      type: "enum"
+      default: "false"
+      options:
+        - false
+        - true
 
 services:
   nginx:
