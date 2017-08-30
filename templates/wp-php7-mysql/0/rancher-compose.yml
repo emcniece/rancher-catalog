@@ -1,18 +1,18 @@
 version: '2'
 catalog:
   name: WordPress PHP7 MySQL
-  version: 0.0.4
+  version: 0.0.5
   description: One-click WordPress w/ PHP7-FPM, Redis, Nginx, MySQL
   maintainer: "Eric McNiece <emcniece@gmail.com>"
 
   questions:
-    - variable: "PORT"
-      description: |
-        Port for HTTP traffic
-      label: "Port"
-      required: false
-      type: "int"
-      default: 45000
+    #- variable: "PORT"
+    #  description: |
+    #    Port for HTTP traffic
+    #  label: "Port"
+    #  required: false
+    #  type: "int"
+    #  default: 45000
 
     - variable: "MYSQL_NAME"
       description: "Database Name"
@@ -60,6 +60,11 @@ catalog:
         - http
         - https
 
+    - variable: ARCHIVE_ROOT_FILE
+      label: Archive Root File
+      description: "File in directory to treat as web root"
+      type: "string"
+      default: "wp-config.php"
     - variable: STORAGE_LOCAL
       label: Local Storage Driver
       description: "Options: 'local' or 'nfs' (no host directory support)"

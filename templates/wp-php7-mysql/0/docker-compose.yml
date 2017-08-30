@@ -10,9 +10,10 @@ services:
       rgon.ssl: ${SSL}
       rgon.domain: ${HOST}
       rgon.redirect: ${REDIRECT}
+      rgon.port: 80
 
   mysql-helper:
-    image: emcniece/mysql-helper:0.0.4
+    image: emcniece/mysql-helper:0.0.5
     links:
     - mysql:mysql
     volumes:
@@ -27,6 +28,8 @@ services:
       SQL_GZ: 'true'
       INIT_RESTORE_LATEST: 'true'
       BACKUP_DIR: "/backup/${HOST}"
+      CRON_TIME: "0 0 * * *"
+      ARCHIVE_ROOT_FILE: ${ARCHIVE_ROOT_FILE}
 
   wp-fpm:
     image: emcniece/wordpress:4-php7.1-fpm-alpine
