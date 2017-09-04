@@ -13,7 +13,7 @@ services:
       rgon.port: 80
 
   mysql-helper:
-    image: emcniece/mysql-helper:0.0.5
+    image: emcniece/mysql-helper:0.0.6
     links:
     - mysql:mysql
     volumes:
