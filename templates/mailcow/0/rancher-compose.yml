@@ -1,0 +1,146 @@
+.catalog:
+  name: mailcow
+  version: 0.0.2
+  description: mailserver suite
+  questions:
+    - variable: MAILCOW_HOSTNAME
+      label: Hostname
+      type: "string"
+      required: true
+      description: "FQDN, mail.mysite.com"
+    - variable: TZ
+      label: Timezone
+      type: "string"
+      required: true
+      default: "America/Vancouver"
+      description: "Format: Europe/Berlin"
+
+    - variable: DATA_DIR
+      label: Config Data Directory
+      description: "Local directory for the /data/ from the repo. Can't be in NFS or a storage driver. No trailing slash."
+      type: "string"
+      default: "/home/rancher/mailcow-dockerized/data"
+
+    - variable: MYSQL_DATADIR
+      label: MySQL Storage Location
+      required: true
+      type: "string"
+      default: "/home/rancher/mailcow-dockerized/data/mysql-data"
+      description: "Use 'mysql-vol-1' for volume driver (slow), or custom dir for local machine (fast)"
+    - variable: DBROOT
+      label: DB Root Password
+      required: true
+      type: "password"
+      default: mailcow
+    - variable: DBNAME
+      label: Database Name
+      required: true
+      type: "string"
+      default: "mailcow"
+    - variable: DBUSER
+      label: Database User Name
+      required: true
+      type: "string"
+      default: "mailcow"
+    - variable: DBPASS
+      label: Database User Password
+      required: true
+      type: "password"
+      default: "mailcow"
+
+    - variable: IMAP_PORT
+      label: IMAP Port
+      required: true
+      type: "int"
+      default: 143
+    - variable: IMAPS_PORT
+      label: IMAPS Port
+      required: true
+      type: "int"
+      default: 993
+    - variable: POP_PORT
+      label: POP Port
+      required: true
+      type: "int"
+      default: 110
+    - variable: POPS_PORT
+      label: POPS Port
+      required: true
+      type: "int"
+      default: 995
+    - variable: SIEVE_PORT
+      label: SIEVE Port
+      required: true
+      type: "int"
+      default: 4190
+    - variable: SMTP_PORT
+      label: SMTP Port
+      required: true
+      type: "int"
+      default: 25
+    - variable: SMTPS_PORT
+      label: SMTPS Port
+      required: true
+      type: "int"
+      default: 465
+    - variable: SUBMISSION_PORT
+      label: Submission Port
+      required: true
+      type: "int"
+      default: 587
+    - variable: HTTP_PORT
+      label: HTTP Port
+      type: "int"
+      default: 8080
+    - variable: HTTPS_PORT
+      label: HTTPS Port
+      type: "int"
+      default: 8081
+
+    - variable: RGON_SSL
+      label: "RGON Proxy Enable SSL"
+      description: "Allow RGON Proxy to obtain ACME SSL certs for the domain name"
+      default: false
+      type: "boolean"
+    - variable: RGON_REDIRECT
+      description: "HTTP or HTTPS domain name prefix"
+      label: "RGON Proxy HTTPS Redirect"
+      required: true
+      type: "enum"
+      default: "http"
+      options:
+        - "http"
+        - "https"
+
+    - variable: STORAGE_DRIVER
+      label: Storage Driver
+      description: "Set driver, if needed. Eg. 'rancher-nfs'"
+      type: "string"
+      default: "rancher-nfs"
+
+bind9:
+  scale: 1
+mysql:
+  scale: 1
+redis:
+  scale: 1
+clamd:
+  scale: 1
+rspamd:
+  scale: 1
+php-fpm:
+  scale: 1
+sogo:
+  scale: 1
+rmilter:
+  scale: 1
+dovecot:
+  scale: 1
+postfix:
+  scale: 1
+memcached:
+  scale: 1
+nginx:
+  scale: 1
+ipv6nat:
+  scale: 1

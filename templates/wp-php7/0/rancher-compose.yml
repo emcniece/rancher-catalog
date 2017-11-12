@@ -1,10 +1,11 @@
-.catalog:
+version: '2'
+catalog:
   name: WordPress PHP7
   version: 0.0.2
   description: |
     One-click WordPress w/ PHP7-FPM, Redis, Nginx
   maintainer: "Eric McNiece <emcniece@gmail.com>"
-  uuid: wp-php7-0
+
   questions:
     - variable: "DIR"
       label: "Storage directory"
@@ -23,6 +24,12 @@
       label: "DB Host"
       required: true
       type: "string"
+    - variable: "MYSQL_PORT"
+      description: "Database Port"
+      label: "DB Port"
+      required: true
+      type: "int"
+      default: 3306
     - variable: "MYSQL_NAME"
       description: "Database Name"
       label: "DB Name"
@@ -43,7 +50,7 @@
       default: "wordpress"
 
     - variable: "HOST"
-      description: "RGON-Proxy Hostname for WordPress (FQDN)"
+      description: "RGON-Proxy Hostname for WordPress (FQDN). Also used for helper backup directory"
       label: "Hostname"
       required: false
       type: "string"
@@ -62,3 +69,24 @@
       options:
         - http
         - https
+
+    - variable: STORAGE_LOCAL
+      label: Local Storage Driver
+      description: "Options: 'local' or 'nfs' (no host directory support)"
+      type: "string"
+      default: "local"
+    - variable: STORAGE_REMOTE
+      label: Remote Storage Driver
+      description: "Options: 'local' (named volume) or 'rancher-nfs' for Rancher-managed storage"
+      type: "string"
+      default: "rancher-nfs"
+
+services:
+  nginx:
+    scale: 1
+  wp-fpm:
+    scale: 1
+  mysql-helper:
+    scale: 1
+  redis:
+    scale: 1
