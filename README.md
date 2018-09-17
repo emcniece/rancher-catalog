@@ -4,9 +4,14 @@ A catalog for Rancher which currently includes:
 
 - Apt-Cacher-NG
 - Concourse CI
+- Craft CMS v2.x
 - Let's Encrypt Nginx Proxy
 - Logrotate
+- Mailcow
+- Netdata Plus
+- NewRelic Sysmond (deprecated)
 - Nginx-Friendly Docker Registry
+- Rancher Config Exporter
 - StriderCD
 - Verdaccio NPM Proxy/Registry
 - WhoAmI

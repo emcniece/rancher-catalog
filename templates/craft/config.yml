@@ -1,0 +1,7 @@
+name: Craft PHP7 MariaDB
+description: |
+  One-click Craft CMS w/ PHP7-FPM, Redis, Nginx, MariaDB
+version: 2
+category: Blogging
+maintainer: "Eric McNiece <emcniece@gmail.com>"
+projectURL: https://github.com/emcniece/docker-craft
