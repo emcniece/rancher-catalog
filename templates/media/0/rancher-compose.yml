@@ -1,0 +1,5 @@
+.catalog:
+  name: usenet-media
+  version: 0.0.1
+  description: Full media stack for Usenet
+#  questions:
