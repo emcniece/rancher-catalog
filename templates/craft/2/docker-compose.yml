@@ -1,0 +1,49 @@
+version: '2'
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${MYSQL_NAME}
+      MYSQL_PASSWORD: ${MYSQL_PASS}
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: ${MYSQL_USER}
+    command:
+    - mysqld
+    - --innodb-buffer-pool-size=${INNODB_BUF}M
+  nginx:
+    image: emcniece/nginx-cache-purge-craft:1.13-alpine
+    volumes:
+    - craftroot:/var/www/html
+    links:
+    - craft:craft
+    labels:
+      traefik.frontend.rule: Host:${HOST}
+      traefik.port: '80'
+      traefik.enable: 'true'
+  craft:
+    image: emcniece/docker-craft:2-php7.1-fpm-alpine
+    environment:
+      DB_HOST: mariadb
+      DB_NAME: ${MYSQL_NAME}
+      DB_PASS: ${MYSQL_PASS}
+      DB_PORT: '3306'
+      DB_USER: ${MYSQL_USER}
+      LANG: C.UTF-8
+      REDIS_HOST: redis
+    volumes:
+    - craftroot:/var/www/html
+    - backup:/backup
+    links:
+    - mariadb:mariadb
+    - redis:redis
+  redis:
+    image: redis:4-alpine
+
+volumes:
+  craftroot:
+    driver:  ${STORAGE_LOCAL}
+  backup:
+    external: true
+    driver: ${STORAGE_REMOTE}
+  

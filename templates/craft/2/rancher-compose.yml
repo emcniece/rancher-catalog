@@ -1,0 +1,67 @@
+version: '2'
+catalog:
+  name: Craft PHP7 MariaDB
+  version: 2
+  description: One-click Craft CMS w/ PHP7-FPM, Redis, Nginx, MariaDB
+  maintainer: "Eric McNiece <emcniece@gmail.com>"
+
+  questions:
+    #- variable: "PORT"
+    #  description: |
+    #    Port for HTTP traffic
+    #  label: "Port"
+    #  required: false
+    #  type: "int"
+    #  default: 45000
+
+    - variable: "MYSQL_NAME"
+      description: "Database Name"
+      label: "DB Name"
+      required: true
+      type: "string"
+      default: "craft"
+    - variable: "MYSQL_USER"
+      description: "Database User"
+      label: "DB User"
+      required: true
+      type: "string"
+      default: "craft"
+    - variable: "MYSQL_PASS"
+      description: "Database Password"
+      label: "DB Password"
+      required: true
+      type: "password"
+      default: "craft"
+    - variable: "INNODB_BUF"
+      description: "Should be total size of DB + 60%"
+      label: "InnoDB Buffer Pool Size (MB)"
+      required: true
+      type: "int"
+      default: 20
+
+    - variable: "HOST"
+      description: "Traefik Hostname for Craft (FQDN)"
+      label: "Hostname"
+      required: true
+      type: "string"
+    
+    - variable: STORAGE_LOCAL
+      label: Local Storage Driver
+      description: "Options: 'local' or 'nfs' (no host directory support)"
+      type: "string"
+      default: "local"
+    - variable: STORAGE_REMOTE
+      label: Remote Storage Driver
+      description: "Options: 'local' (named volume) or 'rancher-nfs' for Rancher-managed storage"
+      type: "string"
+      default: "rancher-nfs"
+
+services:
+  nginx:
+    scale: 1
+  craft:
+    scale: 1
+  mariadb:
+    scale: 1
+  redis:
+    scale: 1
